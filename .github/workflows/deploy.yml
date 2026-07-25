@@ -39,10 +39,12 @@ jobs:
           flutter analyze --no-fatal-infos
           flutter test
 
-      # base-href "/" is correct for a user site served from the domain root
-      # (https://<user>.github.io/). For a project repo it must instead be
-      # "/<repo-name>/", or every asset 404s.
-      - run: flutter build web --release --base-href /
+      # Must match the repo name exactly, with both slashes: the site is served
+      # from https://samer-aljammal.github.io/portfolio/, and a mismatch here
+      # makes every asset and font request resolve against the domain root
+      # instead — a blank page with 404s in the console. Rename the repo and you
+      # must change this line too.
+      - run: flutter build web --release --base-href /portfolio/
 
       - uses: actions/configure-pages@v5
 

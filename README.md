@@ -140,33 +140,36 @@ or spacing against widget-test measurements** — check them in a browser.
 push to `main`. It runs `flutter analyze` and `flutter test` first, so a broken
 commit fails the workflow instead of going live. No build output is committed.
 
+Live at **https://samer-aljammal.github.io/portfolio/**
+
 ### One-time setup
 
-1. Create an **empty public repo named exactly `samer-aljammal.github.io`** —
-   that name is what makes GitHub serve it from the domain root.
+1. Create an **empty public repo named `portfolio`** (no README, no .gitignore).
 2. Push:
 
    ```bash
-   git remote add origin https://github.com/samer-aljammal/samer-aljammal.github.io.git
-   git branch -M main
+   git remote add origin https://github.com/samer-aljammal/portfolio.git
    git push -u origin main
    ```
 
 3. In the repo: **Settings → Pages → Build and deployment → Source: GitHub
-   Actions**. (Not "Deploy from a branch" — the workflow uploads an artifact.)
+   Actions**. (Not "Deploy from a branch" — the workflow uploads an artifact,
+   so a branch source finds nothing to serve.)
 
-Live at **https://samer-aljammal.github.io/** a couple of minutes later. Every
-later change is just `git push`.
+Every later change is just `git push`.
 
-### Using a project repo instead
+### If you rename the repo
 
-If you name the repo something else (e.g. `portfolio`), the URL becomes
-`https://samer-aljammal.github.io/portfolio/` and the base href **must** match,
-or every asset 404s:
+The base href in the workflow **must** match the repo name:
 
 ```yaml
-- run: flutter build web --release --base-href /portfolio/
+- run: flutter build web --release --base-href /<repo-name>/
 ```
+
+Get it wrong and the page loads blank with 404s in the console — asset requests
+resolve against the domain root instead of the subpath. A repo named exactly
+`samer-aljammal.github.io` is the one case that uses `--base-href /`, since it
+is served from the root.
 
 The Flutter SDK version is pinned in the workflow. Bump it there when you
 upgrade locally, so CI keeps building what you tested.
