@@ -1,0 +1,35 @@
+{
+    "name": "Samer Aljammal — Mobile App Developer",
+    "short_name": "SA Portfolio",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#0B0714",
+    "theme_color": "#0B0714",
+    "description": "Flutter mobile app developer. Clean, feature-first architecture and responsive interfaces.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}

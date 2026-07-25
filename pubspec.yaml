@@ -1,0 +1,37 @@
+name: my_portfolio
+description: "Personal portfolio — Flutter web."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+
+  # Outfit (display) + Inter (body) without bundling font binaries.
+  google_fonts: ^6.2.1
+
+  # Mail / phone / external project links.
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    # Project screenshots (see assets/projects/README.md). Everything in here
+    # ships in the web bundle, so optimise before adding.
+    - assets/projects/
+    # Your portrait: assets/profile/avatar.jpg. Missing file falls back to an
+    # initials tile, so this stays valid whether or not the photo is there.
+    - assets/profile/
