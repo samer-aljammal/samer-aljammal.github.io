@@ -216,6 +216,32 @@ void main() {
     }
   });
 
+  test('a self-hosted CV link has a file behind it', () {
+    // The CV is served from this site's own domain, so the file must be in web/
+    // to end up in the build. A rename would otherwise ship a button that 404s.
+    final cvUrl = ServiceLocator.profile.getProfile().cvUrl;
+    if (cvUrl == null) return;
+
+    const origin = 'https://samer-aljammal.github.io/';
+    if (!cvUrl.startsWith(origin)) return; // hosted elsewhere; nothing to check
+
+    final fileName = cvUrl.substring(origin.length);
+    expect(
+      File('web/$fileName').existsSync(),
+      isTrue,
+      reason: 'cvUrl points at $fileName, but web/$fileName does not exist',
+    );
+  });
+
+  testWidgets('the hero offers a CV download when one is linked', (
+    tester,
+  ) async {
+    await pumpSite(tester);
+
+    final hasCv = ServiceLocator.profile.getProfile().cvUrl != null;
+    expect(find.text('Download CV'), hasCv ? findsOneWidget : findsNothing);
+  });
+
   test('every declared screenshot exists on disk', () {
     for (final project in ServiceLocator.projects.getProjects()) {
       for (final path in project.screenshots) {

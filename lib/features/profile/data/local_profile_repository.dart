@@ -47,8 +47,14 @@ class LocalProfileRepository implements ProfileRepository {
     // then it falls back to an initials tile, so nothing breaks.
     avatarAsset: 'assets/profile/avatar.jpg',
 
-    // TODO(you): host your CV and link it. Null hides the download button.
-    cvUrl: null,
+    // Served from this site's own domain: the file lives at
+    // web/Samer_Aljammal_CV.pdf, and Flutter copies web/ verbatim into the
+    // build output. Hosting it here rather than on Drive or Dropbox means no
+    // permission prompt and no expiring link between a recruiter and the CV.
+    //
+    // Must be absolute — the launcher opens it as an external target, so a bare
+    // relative path would not resolve. Null hides the download button.
+    cvUrl: 'https://samer-aljammal.github.io/Samer_Aljammal_CV.pdf',
 
     // Firebase and clean architecture are taken from your own repo
     // descriptions. TODO(you): add the specific state-management library

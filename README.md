@@ -140,25 +140,12 @@ or spacing against widget-test measurements** — check them in a browser.
 push to `main`. It runs `flutter analyze` and `flutter test` first, so a broken
 commit fails the workflow instead of going live. No build output is committed.
 
-Live at **https://samer-aljammal.github.io/portfolio/**
+Live at **https://samer-aljammal.github.io/**
 
-### One-time setup
+Served from the repo `samer-aljammal.github.io`, which GitHub publishes at the
+domain root. Deployment is already set up — pushing to `main` is all it takes.
 
-1. Create an **empty public repo named `portfolio`** (no README, no .gitignore).
-2. Push:
-
-   ```bash
-   git remote add origin https://github.com/samer-aljammal/portfolio.git
-   git push -u origin main
-   ```
-
-3. In the repo: **Settings → Pages → Build and deployment → Source: GitHub
-   Actions**. (Not "Deploy from a branch" — the workflow uploads an artifact,
-   so a branch source finds nothing to serve.)
-
-Every later change is just `git push`.
-
-### If you rename the repo
+### If this ever moves to a project repo
 
 The base href in the workflow **must** match the repo name:
 
@@ -167,9 +154,8 @@ The base href in the workflow **must** match the repo name:
 ```
 
 Get it wrong and the page loads blank with 404s in the console — asset requests
-resolve against the domain root instead of the subpath. A repo named exactly
-`samer-aljammal.github.io` is the one case that uses `--base-href /`, since it
-is served from the root.
+resolve against a path that does not exist. The current `/` is correct *only*
+because the repo is named `<user>.github.io`.
 
 The Flutter SDK version is pinned in the workflow. Bump it there when you
 upgrade locally, so CI keeps building what you tested.

@@ -39,12 +39,11 @@ jobs:
           flutter analyze --no-fatal-infos
           flutter test
 
-      # Must match the repo name exactly, with both slashes: the site is served
-      # from https://samer-aljammal.github.io/portfolio/, and a mismatch here
-      # makes every asset and font request resolve against the domain root
-      # instead — a blank page with 404s in the console. Rename the repo and you
-      # must change this line too.
-      - run: flutter build web --release --base-href /portfolio/
+      # "/" is correct because the repo is named samer-aljammal.github.io, which
+      # GitHub serves from the domain root. If this ever moves to a project repo
+      # (e.g. .../portfolio/), this must become "/portfolio/" — a mismatch
+      # resolves every asset against the wrong path and serves a blank page.
+      - run: flutter build web --release --base-href /
 
       - uses: actions/configure-pages@v5
 
