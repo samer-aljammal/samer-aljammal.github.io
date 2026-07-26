@@ -35,6 +35,7 @@ class LocalProjectsRepository implements ProjectsRepository {
         'Voice notes with inline playback and duration',
         'Reply quoting that keeps the original message in context',
         'Read receipts and live last-seen presence',
+        'Sign-in with email, Google, Facebook or Apple',
       ],
       accent: Color(0xFFA855F7),
       screenshots: [
@@ -42,6 +43,7 @@ class LocalProjectsRepository implements ProjectsRepository {
         'assets/projects/chattr_2.jpg',
         'assets/projects/chattr_3.jpg',
         'assets/projects/chattr_4.jpg',
+        'assets/projects/chattr_5.jpg',
       ],
       repoUrl: 'https://github.com/samer-aljammal/chattr',
     ),
