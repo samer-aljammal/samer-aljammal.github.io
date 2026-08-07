@@ -7,6 +7,7 @@ import '../../../core/theme/app_typography.dart';
 import '../../../core/utils/link_launcher.dart';
 import '../../../core/widgets/ghost_button.dart';
 import '../../../core/widgets/line_reveal.dart';
+import '../../../core/widgets/prism_artifact.dart';
 import '../../../core/widgets/reveal_on_scroll.dart';
 import '../../../core/widgets/section_shell.dart';
 import '../../profile/domain/entities/profile.dart';
@@ -49,20 +50,52 @@ class HeroSection extends StatelessWidget {
         desktop: 104,
       ),
       child: wide
-          ? Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+          ? Stack(
               children: [
-                Expanded(flex: 7, child: _Copy(profile: profile, onViewWork: onViewWork, onContact: onContact)),
-                const SizedBox(width: 56),
-                Expanded(
-                  flex: 4,
-                  child: Center(child: _Device(screens: showcaseScreens)),
+                // Behind the type, biased right so the headline crosses its
+                // left edge — the overlap is what makes the artifact feel part
+                // of the composition rather than an image parked beside it.
+                Positioned.fill(
+                  child: Align(
+                    alignment: const Alignment(0.55, 0),
+                    child: FractionallySizedBox(
+                      widthFactor: 0.62,
+                      heightFactor: 1.25,
+                      child: const PrismArtifact(opacity: 0.85),
+                    ),
+                  ),
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 7,
+                      child: _Copy(
+                        profile: profile,
+                        onViewWork: onViewWork,
+                        onContact: onContact,
+                      ),
+                    ),
+                    const SizedBox(width: 56),
+                    Expanded(
+                      flex: 4,
+                      child: Center(child: _Device(screens: showcaseScreens)),
+                    ),
+                  ],
                 ),
               ],
             )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // On narrow screens the prism sits above the copy at reduced
+                // strength rather than behind it — at phone width it would
+                // otherwise fight the headline for the same pixels.
+                SizedBox(
+                  height: 260,
+                  child: const PrismArtifact(opacity: 0.7),
+                ),
+                const SizedBox(height: 40),
                 _Copy(
                   profile: profile,
                   onViewWork: onViewWork,
@@ -118,7 +151,7 @@ class _Copy extends StatelessWidget {
               profile.heroSubtitle,
               style: Theme.of(
                 context,
-              ).textTheme.bodyMedium?.copyWith(color: AppColors.ash),
+              ).textTheme.bodyMedium?.copyWith(color: AppColors.fog),
             ),
           ),
         ),
@@ -160,12 +193,12 @@ class _Copy extends StatelessWidget {
             children: [
               Text(
                 profile.role.toUpperCase(),
-                style: AppTypography.label(color: AppColors.iron),
+                style: AppTypography.label(color: AppColors.fog),
               ),
-              Container(width: 28, height: 1, color: AppColors.hairline),
+              Container(width: 28, height: 1, color: AppColors.ashBorder),
               Text(
                 profile.location.toUpperCase(),
-                style: AppTypography.label(color: AppColors.iron),
+                style: AppTypography.label(color: AppColors.fog),
               ),
             ],
           ),

@@ -22,13 +22,13 @@ class MonoBadge extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: AppColors.hairline),
+        border: Border.all(color: AppColors.ashBorder),
       ),
       child: Text(
         label,
-        style: AppTypography.mono(
+        style: AppTypography.sans(
           fontSize: 12,
-          color: accent ? AppColors.iris : AppColors.ash,
+          color: accent ? AppColors.bone : AppColors.fog,
         ),
       ),
     );

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 import '../../../core/constants/app_motion.dart';
 import '../../../core/responsive/breakpoints.dart';
@@ -18,6 +18,10 @@ class AboutSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SectionShell(
+      // The one slate band on the page. Sitting between the hero and the work,
+      // it breaks the canvas into three tonal zones so the scroll has rhythm
+      // instead of running as a single unbroken dark field.
+      band: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -74,7 +78,7 @@ class _Body extends StatelessWidget {
                 paragraph,
                 style: i == 0
                     ? text.bodyLarge?.copyWith(color: AppColors.bone)
-                    : text.bodyMedium?.copyWith(color: AppColors.ash),
+                    : text.bodyMedium?.copyWith(color: AppColors.fog),
               ),
             ),
         ], step: AppMotion.stagger),
@@ -94,14 +98,14 @@ class _Body extends StatelessWidget {
                     width: 132,
                     child: Text(
                       principle.title.toUpperCase(),
-                      style: AppTypography.label(color: AppColors.iron),
+                      style: AppTypography.label(color: AppColors.fog),
                     ),
                   ),
                   const SizedBox(width: 24),
                   Expanded(
                     child: Text(
                       principle.detail,
-                      style: text.bodySmall?.copyWith(color: AppColors.smoke),
+                      style: text.bodySmall?.copyWith(color: AppColors.fog),
                     ),
                   ),
                 ],

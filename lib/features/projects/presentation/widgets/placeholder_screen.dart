@@ -58,7 +58,7 @@ class PlaceholderScreen extends StatelessWidget {
                 Center(
                   child: Text(
                     projectName.toUpperCase(),
-                    style: AppTypography.mono(
+                    style: AppTypography.sans(
                       fontSize: unit * 2.6,
                       color: Colors.white24,
                       letterSpacing: unit * 0.3,

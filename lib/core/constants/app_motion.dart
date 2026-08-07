@@ -9,14 +9,15 @@ import 'package:flutter/animation.dart';
 abstract final class AppMotion {
   const AppMotion._();
 
-  /// Hover and focus feedback. Anything slower feels laggy on a cursor.
-  static const Duration hover = Duration(milliseconds: 150);
+  /// Hover and focus feedback. Kept well under the 500ms house duration —
+  /// a cursor state that takes half a second to answer feels broken.
+  static const Duration hover = Duration(milliseconds: 220);
 
-  /// Standard state change.
-  static const Duration base = Duration(milliseconds: 280);
+  /// The house duration. Most state changes run at this.
+  static const Duration base = Duration(milliseconds: 500);
 
   /// Entrance of a revealed element.
-  static const Duration enter = Duration(milliseconds: 720);
+  static const Duration enter = Duration(milliseconds: 800);
 
   /// Smooth scroll to a section.
   static const Duration navigate = Duration(milliseconds: 900);
@@ -30,9 +31,12 @@ abstract final class AppMotion {
   /// Dwell on one screen inside a phone mockup before it advances.
   static const Duration phoneScrollPerScreen = Duration(milliseconds: 2600);
 
-  /// Standard easing — decelerate into place, never overshoot.
-  static const Curve ease = Curves.easeOutCubic;
+  /// The signature curve, and the reason the motion reads as expensive: a
+  /// slow start that then commits and stops decisively, like a lens pulling
+  /// focus. Springs and bounces are explicitly rejected — confidence reads
+  /// through stillness, not overshoot.
+  static const Curve ease = Cubic(0.52, 0.01, 0, 1);
 
-  /// Stronger deceleration for large travel (headline lines, section blocks).
-  static const Curve easeStrong = Curves.easeOutQuint;
+  /// Same character, applied to large travel (headline lines, section blocks).
+  static const Curve easeStrong = Cubic(0.52, 0.01, 0, 1);
 }

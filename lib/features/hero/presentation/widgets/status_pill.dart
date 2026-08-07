@@ -18,7 +18,7 @@ class StatusPill extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: AppColors.hairline),
+        border: Border.all(color: AppColors.ashBorder),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -27,14 +27,14 @@ class StatusPill extends StatelessWidget {
             width: 5,
             height: 5,
             decoration: const BoxDecoration(
-              color: AppColors.green,
+              color: AppColors.bone,
               shape: BoxShape.circle,
             ),
           ),
           const SizedBox(width: 9),
           Text(
             label,
-            style: AppTypography.mono(fontSize: 12, color: AppColors.ash),
+            style: AppTypography.sans(fontSize: 12, color: AppColors.fog),
           ),
         ],
       ),

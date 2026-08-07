@@ -40,8 +40,8 @@ class ProfilePortrait extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border.all(
                   color: hovered
-                      ? AppColors.hairlineBright
-                      : AppColors.hairline,
+                      ? AppColors.ashBright
+                      : AppColors.ashBorder,
                 ),
                 borderRadius: BorderRadius.circular(4),
               ),
@@ -58,16 +58,16 @@ class ProfilePortrait extends StatelessWidget {
           children: [
             Text(
               profile.name.toUpperCase(),
-              style: AppTypography.label(color: AppColors.ash),
+              style: AppTypography.label(color: AppColors.fog),
             ),
             const SizedBox(width: 12),
-            Expanded(child: Container(height: 1, color: AppColors.hairline)),
+            Expanded(child: Container(height: 1, color: AppColors.ashBorder)),
           ],
         ),
         const SizedBox(height: 8),
         Text(
           profile.role,
-          style: AppTypography.mono(fontSize: 12, color: AppColors.iron),
+          style: AppTypography.sans(fontSize: 12, color: AppColors.fog),
         ),
       ],
     );
@@ -115,11 +115,11 @@ class _Fallback extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-      color: AppColors.surfaceLift,
+      color: AppColors.slateShadow,
       child: Center(
         child: Text(
           profile.initials,
-          style: AppTypography.mono(fontSize: 28, color: AppColors.charcoal),
+          style: AppTypography.sans(fontSize: 28, color: AppColors.ashBorder),
         ),
       ),
     );

@@ -61,9 +61,9 @@ class DeviceFrame extends StatelessWidget {
             width: width,
             height: height,
             decoration: BoxDecoration(
-              color: AppColors.void_,
+              color: AppColors.obsidian,
               borderRadius: BorderRadius.circular(radius),
-              border: Border.all(color: AppColors.hairline, width: 1),
+              border: Border.all(color: AppColors.ashBorder, width: 1),
             ),
             padding: EdgeInsets.all(bezel),
             child: ClipRRect(
@@ -122,7 +122,7 @@ class _SideButton extends StatelessWidget {
             width: width,
             height: length,
             decoration: BoxDecoration(
-              color: AppColors.hairline,
+              color: AppColors.ashBorder,
               borderRadius: BorderRadius.circular(width),
             ),
           ),

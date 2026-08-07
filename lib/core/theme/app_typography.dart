@@ -3,48 +3,56 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'app_colors.dart';
 
-/// Three typefaces, each with one job.
+/// One typeface, one weight, hierarchy from scale alone.
 ///
-/// * **Instrument Serif** — display only. An editorial serif at large sizes is
-///   the single strongest signal that a page was art-directed rather than
-///   assembled from a UI kit. Used for hero and section headlines, nothing else.
-/// * **Inter** — body, UI, navigation, buttons.
-/// * **JetBrains Mono** — code, identifiers, section numbers, metadata. The
-///   monospace presence is the developer identity running through the page.
+/// Instrument Sans stands in for Neue Montreal — a modern grotesque that holds
+/// up at display sizes. Everything is weight 400: a 100px headline next to 18px
+/// body is a 5x ratio, and at that distance bolding is not only unnecessary, it
+/// reads as insecurity. Weight 700 is reserved for one role only.
 ///
-/// Tracking is the other half of the effect: negative at display sizes so the
-/// headline reads compressed and confident, positive on small uppercase mono so
-/// labels breathe.
+/// The other half of the effect is tracking. Display sizes take -2% and small
+/// uppercase labels take +2% — tight where the letters are huge, open where
+/// they are small and set in caps.
 abstract final class AppTypography {
   const AppTypography._();
 
-  /// Editorial serif for display type.
+  /// Cinematic display type. Line height stays at 1.0–1.05 so multi-line
+  /// stacks read as sculptural blocks rather than as paragraphs.
   static TextStyle display({
     required double fontSize,
-    Color color = AppColors.white,
+    Color color = AppColors.bone,
     double height = 1.0,
     FontWeight fontWeight = FontWeight.w400,
-    double? letterSpacing,
-    FontStyle? fontStyle,
-  }) => GoogleFonts.instrumentSerif(
+  }) => GoogleFonts.instrumentSans(
     fontSize: fontSize,
     color: color,
     height: height,
     fontWeight: fontWeight,
-    fontStyle: fontStyle,
-    // Roughly -1% of the size: what makes large serif type feel set rather
-    // than typed.
-    letterSpacing: letterSpacing ?? fontSize * -0.01,
+    letterSpacing: fontSize * -0.02,
   );
 
-  /// Monospace for code, identifiers, numbers and small uppercase labels.
-  static TextStyle mono({
-    double fontSize = 12,
-    Color color = AppColors.ash,
+  /// Uppercase metadata: eyebrows, nav, taxonomy labels, section numbers.
+  /// All-caps at weight 400 — restraint rather than shouting.
+  static TextStyle label({
+    Color color = AppColors.fog,
+    double fontSize = 14,
+  }) => GoogleFonts.instrumentSans(
+    fontSize: fontSize,
+    color: color,
+    fontWeight: FontWeight.w400,
+    letterSpacing: fontSize * 0.02 + 0.6,
+    height: 1.2,
+  );
+
+  /// General-purpose sans for anything not covered by a named role — inline
+  /// metadata, captions, values in a definition list.
+  static TextStyle sans({
+    double fontSize = 16,
+    Color color = AppColors.bone,
     FontWeight fontWeight = FontWeight.w400,
     double letterSpacing = 0,
     double height = 1.4,
-  }) => GoogleFonts.jetBrainsMono(
+  }) => GoogleFonts.instrumentSans(
     fontSize: fontSize,
     color: color,
     fontWeight: fontWeight,
@@ -52,44 +60,45 @@ abstract final class AppTypography {
     height: height,
   );
 
-  /// Small uppercase mono label — section eyebrows, metadata keys.
-  static TextStyle label({
-    Color color = AppColors.iron,
-    double fontSize = 11,
-  }) => GoogleFonts.jetBrainsMono(
+  /// The one place weight 700 is allowed: mid-scale subheadings.
+  static TextStyle subheading({
+    double fontSize = 33,
+    Color color = AppColors.bone,
+  }) => GoogleFonts.instrumentSans(
     fontSize: fontSize,
     color: color,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 1.6,
+    fontWeight: FontWeight.w700,
     height: 1.2,
+    letterSpacing: fontSize * -0.01,
   );
 
   static TextTheme textTheme() {
-    final TextTheme body = GoogleFonts.interTextTheme(
+    final TextTheme base = GoogleFonts.instrumentSansTextTheme(
       const TextTheme(
         titleLarge: TextStyle(
-          fontSize: 20,
-          height: 1.3,
-          fontWeight: FontWeight.w500,
-          letterSpacing: -0.3,
+          fontSize: 22,
+          height: 1.25,
+          fontWeight: FontWeight.w400,
+          letterSpacing: -0.22,
         ),
         titleMedium: TextStyle(
-          fontSize: 16,
-          height: 1.4,
-          fontWeight: FontWeight.w500,
-          letterSpacing: -0.1,
+          fontSize: 20,
+          height: 1.3,
+          fontWeight: FontWeight.w400,
+          letterSpacing: -0.2,
         ),
-        bodyLarge: TextStyle(fontSize: 18, height: 1.6),
-        bodyMedium: TextStyle(fontSize: 16, height: 1.6),
-        bodySmall: TextStyle(fontSize: 14, height: 1.5),
+        bodyLarge: TextStyle(fontSize: 20, height: 1.5, letterSpacing: -0.2),
+        bodyMedium: TextStyle(fontSize: 18, height: 1.55),
+        bodySmall: TextStyle(fontSize: 16, height: 1.5),
         labelLarge: TextStyle(
-          fontSize: 14,
+          fontSize: 15,
           height: 1.2,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w400,
+          letterSpacing: 0.15,
         ),
       ),
     );
 
-    return body.apply(bodyColor: AppColors.bone, displayColor: AppColors.white);
+    return base.apply(bodyColor: AppColors.bone, displayColor: AppColors.bone);
   }
 }

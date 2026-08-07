@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 import '../../../../core/responsive/breakpoints.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -25,8 +25,8 @@ class SiteFooter extends StatelessWidget {
     final String year = DateTime.now().year.toString();
 
     final Widget credit = Text(
-      '© $year $name',
-      style: AppTypography.mono(fontSize: 11, color: AppColors.iron),
+      'Â© $year $name',
+      style: AppTypography.sans(fontSize: 11, color: AppColors.fog),
     );
 
     // Handles spelled out, not icons: the bottom of a page is where someone
@@ -41,8 +41,8 @@ class SiteFooter extends StatelessWidget {
             label: link.url.startsWith('mailto:')
                 ? link.url.substring(7)
                 : link.url.replaceFirst(RegExp(r'^https?://(www\.)?'), ''),
-            color: AppColors.smoke,
-            style: AppTypography.mono(fontSize: 11, color: AppColors.smoke),
+            color: AppColors.fog,
+            style: AppTypography.sans(fontSize: 11, color: AppColors.fog),
             onTap: () => LinkLauncher.open(link.url),
           ),
       ],
@@ -51,14 +51,14 @@ class SiteFooter extends StatelessWidget {
     final Widget backToTop = UnderlineLink(
       label: 'Back to top',
       icon: Icons.arrow_upward,
-      color: AppColors.iron,
-      style: AppTypography.mono(fontSize: 11, color: AppColors.iron),
+      color: AppColors.fog,
+      style: AppTypography.sans(fontSize: 11, color: AppColors.fog),
       onTap: onBackToTop,
     );
 
     return Container(
       decoration: const BoxDecoration(
-        border: Border(top: BorderSide(color: AppColors.hairline)),
+        border: Border(top: BorderSide(color: AppColors.ashBorder)),
       ),
       padding: EdgeInsets.symmetric(horizontal: context.gutter, vertical: 32),
       child: Center(

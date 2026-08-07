@@ -44,7 +44,7 @@ class HairlineCard extends StatelessWidget {
         color: hovered ? const Color(0x08FFFFFF) : Colors.transparent,
         borderRadius: BorderRadius.circular(radius),
         border: Border.all(
-          color: hovered ? AppColors.hairlineBright : AppColors.hairline,
+          color: hovered ? AppColors.ashBright : AppColors.ashBorder,
         ),
       ),
       child: child,

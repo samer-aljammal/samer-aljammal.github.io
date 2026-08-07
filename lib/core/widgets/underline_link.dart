@@ -17,7 +17,7 @@ class UnderlineLink extends StatelessWidget {
     this.icon,
     this.style,
     this.color = AppColors.bone,
-    this.hoverColor = AppColors.white,
+    this.hoverColor = AppColors.bone,
     super.key,
   });
 
@@ -31,7 +31,7 @@ class UnderlineLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextStyle base =
-        style ?? AppTypography.mono(fontSize: 13, color: color);
+        style ?? AppTypography.sans(fontSize: 13, color: color);
 
     return HoverRegion(
       onTap: onTap,

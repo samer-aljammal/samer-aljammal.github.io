@@ -60,8 +60,8 @@ class _MarqueeStripState extends State<MarqueeStrip>
       child: DecoratedBox(
         decoration: const BoxDecoration(
           border: Border(
-            top: BorderSide(color: AppColors.hairline),
-            bottom: BorderSide(color: AppColors.hairline),
+            top: BorderSide(color: AppColors.ashBorder),
+            bottom: BorderSide(color: AppColors.ashBorder),
           ),
         ),
         child: ClipRect(
@@ -145,9 +145,9 @@ class _MarqueeRow extends StatelessWidget {
                         item,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTypography.mono(
+                        style: AppTypography.sans(
                           fontSize: 13,
-                          color: AppColors.smoke,
+                          color: AppColors.fog,
                         ),
                       ),
                     ),
@@ -156,7 +156,7 @@ class _MarqueeRow extends StatelessWidget {
                       width: 3,
                       height: 3,
                       decoration: const BoxDecoration(
-                        color: AppColors.charcoal,
+                        color: AppColors.ashBorder,
                         shape: BoxShape.circle,
                       ),
                     ),

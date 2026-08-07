@@ -42,7 +42,7 @@ class TopNav extends StatelessWidget {
           color: isScrolled ? const Color(0xF2000000) : Colors.transparent,
           border: Border(
             bottom: BorderSide(
-              color: isScrolled ? AppColors.hairline : Colors.transparent,
+              color: isScrolled ? AppColors.ashBorder : Colors.transparent,
             ),
           ),
         ),
@@ -108,13 +108,13 @@ class _Wordmark extends StatelessWidget {
         children: [
           // A violet square standing in for a logo: the one piece of brand
           // colour in the chrome, at the smallest possible size.
-          Container(width: 7, height: 7, color: AppColors.iris),
+          Container(width: 7, height: 7, color: AppColors.bone),
           const SizedBox(width: 12),
           AnimatedDefaultTextStyle(
             duration: AppMotion.hover,
-            style: AppTypography.mono(
+            style: AppTypography.sans(
               fontSize: 13,
-              color: hovered ? AppColors.white : AppColors.bone,
+              color: hovered ? AppColors.bone : AppColors.bone,
               letterSpacing: 0.4,
             ),
             child: Text(name),
@@ -151,15 +151,15 @@ class _NavItem extends StatelessWidget {
               height: 5,
               margin: EdgeInsets.only(right: isActive ? 9 : 0),
               decoration: const BoxDecoration(
-                color: AppColors.iris,
+                color: AppColors.bone,
                 shape: BoxShape.circle,
               ),
             ),
             AnimatedDefaultTextStyle(
               duration: AppMotion.hover,
-              style: AppTypography.mono(
+              style: AppTypography.sans(
                 fontSize: 13,
-                color: isActive || hovered ? AppColors.white : AppColors.smoke,
+                color: isActive || hovered ? AppColors.bone : AppColors.fog,
               ),
               child: Text(section.label),
             ),
@@ -181,11 +181,11 @@ class _MobileMenu extends StatelessWidget {
     return PopupMenuButton<PortfolioSectionId>(
       onSelected: onNavigate,
       tooltip: 'Menu',
-      color: AppColors.void_,
+      color: AppColors.obsidian,
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(6),
-        side: const BorderSide(color: AppColors.hairline),
+        side: const BorderSide(color: AppColors.ashBorder),
       ),
       icon: const Icon(Icons.menu, color: AppColors.bone, size: 20),
       itemBuilder: (BuildContext context) => [
@@ -195,10 +195,10 @@ class _MobileMenu extends StatelessWidget {
             height: 42,
             child: Text(
               section.label,
-              style: AppTypography.mono(
+              style: AppTypography.sans(
                 fontSize: 13,
                 color: section == activeSection
-                    ? AppColors.irisGlow
+                    ? AppColors.bone
                     : AppColors.bone,
               ),
             ),

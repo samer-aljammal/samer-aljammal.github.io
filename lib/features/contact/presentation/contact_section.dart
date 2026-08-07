@@ -40,7 +40,7 @@ class ContactSection extends StatelessWidget {
                 'way — I answer every message.',
                 style: Theme.of(
                   context,
-                ).textTheme.bodyMedium?.copyWith(color: AppColors.ash),
+                ).textTheme.bodyMedium?.copyWith(color: AppColors.fog),
               ),
             ),
           ),
@@ -101,7 +101,7 @@ class _Row extends StatelessWidget {
         onTap: onTap,
         builder: (BuildContext context, bool hovered) => Container(
           decoration: const BoxDecoration(
-            border: Border(top: BorderSide(color: AppColors.hairline)),
+            border: Border(top: BorderSide(color: AppColors.ashBorder)),
           ),
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Row(
@@ -113,11 +113,11 @@ class _Row extends StatelessWidget {
               Expanded(
                 child: AnimatedDefaultTextStyle(
                   duration: const Duration(milliseconds: 150),
-                  style: AppTypography.mono(
+                  style: AppTypography.sans(
                     fontSize: 14,
                     color: onTap == null
-                        ? AppColors.smoke
-                        : (hovered ? AppColors.irisGlow : AppColors.bone),
+                        ? AppColors.fog
+                        : (hovered ? AppColors.bone : AppColors.bone),
                   ),
                   child: Text(value),
                 ),
@@ -129,7 +129,7 @@ class _Row extends StatelessWidget {
                   child: Icon(
                     Icons.arrow_outward,
                     size: 14,
-                    color: hovered ? AppColors.irisGlow : AppColors.charcoal,
+                    color: hovered ? AppColors.bone : AppColors.ashBorder,
                   ),
                 ),
             ],

@@ -37,9 +37,9 @@ migrate_working_dir/
 # clone and CI checkout. Keep your own backup of this folder.
 /screenshots_src/
 
-# Contains a plaintext 21st.dev API key. This repository is PUBLIC — committing
-# this file would publish the key to anyone who looks.
-/.mcp.json
+# .mcp.json is tracked on purpose: the 21st CLI writes the API key as a
+# ${API_KEY_21ST} reference rather than a literal, so the file holds no secret.
+# The key itself lives only in the user environment variable.
 /coverage/
 
 # Symbolication related

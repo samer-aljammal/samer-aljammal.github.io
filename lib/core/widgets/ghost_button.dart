@@ -41,8 +41,8 @@ class GhostButton extends StatelessWidget {
       onTap: onPressed,
       builder: (BuildContext context, bool hovered) {
         final Color foreground = emphasis
-            ? AppColors.void_
-            : (hovered ? AppColors.white : AppColors.bone);
+            ? AppColors.obsidian
+            : (hovered ? AppColors.bone : AppColors.bone);
 
         return AnimatedContainer(
           duration: AppMotion.hover,
@@ -53,13 +53,13 @@ class GhostButton extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             color: emphasis
-                ? (hovered ? AppColors.bone : AppColors.white)
+                ? (hovered ? AppColors.bone : AppColors.bone)
                 : (hovered ? const Color(0x0DFFFFFF) : Colors.transparent),
             borderRadius: BorderRadius.circular(6),
             border: Border.all(
               color: emphasis
                   ? Colors.transparent
-                  : (hovered ? AppColors.hairlineBright : AppColors.hairline),
+                  : (hovered ? AppColors.ashBright : AppColors.ashBorder),
             ),
           ),
           child: Row(

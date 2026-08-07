@@ -47,7 +47,7 @@ class SectionHeading extends StatelessWidget {
         RevealOnScroll(
           child: Row(
             children: [
-              Text(index, style: AppTypography.label(color: AppColors.iron)),
+              Text(index, style: AppTypography.label(color: AppColors.fog)),
               const SizedBox(width: 16),
               Text(label.toUpperCase(), style: AppTypography.label()),
               const SizedBox(width: 20),
@@ -70,7 +70,7 @@ class SectionHeading extends StatelessWidget {
                 trailing,
                 style: Theme.of(
                   context,
-                ).textTheme.bodyMedium?.copyWith(color: AppColors.ash),
+                ).textTheme.bodyMedium?.copyWith(color: AppColors.fog),
               ),
             ),
           ),

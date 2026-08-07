@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 
 import '../../../core/constants/app_motion.dart';
 import '../../../core/di/service_locator.dart';
@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.void_,
+      backgroundColor: AppColors.obsidian,
       body: Stack(
         children: [
           SingleChildScrollView(

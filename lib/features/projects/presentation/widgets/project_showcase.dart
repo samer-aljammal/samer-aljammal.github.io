@@ -104,7 +104,7 @@ class _Details extends StatelessWidget {
           children: [
             Text(
               (index + 1).toString().padLeft(2, '0'),
-              style: AppTypography.label(color: AppColors.iron),
+              style: AppTypography.label(color: AppColors.fog),
             ),
             const SizedBox(width: 16),
             const Expanded(child: Divider(height: 1)),
@@ -112,7 +112,7 @@ class _Details extends StatelessWidget {
               const SizedBox(width: 16),
               Text(
                 'COLLABORATION',
-                style: AppTypography.label(color: AppColors.iris),
+                style: AppTypography.label(color: AppColors.bone),
               ),
             ],
           ],
@@ -126,7 +126,7 @@ class _Details extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           project.tagline,
-          style: AppTypography.mono(fontSize: 13, color: AppColors.smoke),
+          style: AppTypography.sans(fontSize: 13, color: AppColors.fog),
         ),
         const SizedBox(height: 24),
 
@@ -134,7 +134,7 @@ class _Details extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 540),
           child: Text(
             project.description,
-            style: text.bodyMedium?.copyWith(color: AppColors.ash),
+            style: text.bodyMedium?.copyWith(color: AppColors.fog),
           ),
         ),
 
@@ -152,9 +152,9 @@ class _Details extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 2),
                     child: Text(
                       '→',
-                      style: AppTypography.mono(
+                      style: AppTypography.sans(
                         fontSize: 13,
-                        color: AppColors.charcoal,
+                        color: AppColors.ashBorder,
                       ),
                     ),
                   ),
@@ -162,7 +162,7 @@ class _Details extends StatelessWidget {
                   Expanded(
                     child: Text(
                       highlight,
-                      style: text.bodySmall?.copyWith(color: AppColors.smoke),
+                      style: text.bodySmall?.copyWith(color: AppColors.fog),
                     ),
                   ),
                 ],

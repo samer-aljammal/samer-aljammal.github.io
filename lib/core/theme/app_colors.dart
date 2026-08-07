@@ -1,68 +1,61 @@
 import 'package:flutter/material.dart';
 
-/// Monochrome-with-one-accent palette.
+/// Prismatic light through obsidian.
 ///
-/// The discipline here is deliberate and it is the whole design: a flat black
-/// canvas, hairline borders instead of shadows, four tiers of grey text, and a
-/// single violet reserved for code and identifiers. No gradients on surfaces,
-/// no glows, no tinted card fills — those read as generated rather than
-/// designed, which is exactly what this replaced.
+/// The canvas is obsidian rather than pure black, and content sits on bands of
+/// cool slate — that tonal step is what stops the page reading as a dead flat
+/// void. All type is a single warm off-white; the only muted tone is a fog
+/// blue for metadata.
+///
+/// Colour proper exists in exactly one place: the prism artifact. Red, cyan and
+/// lime are channel-split edges inside that illustration and must never become
+/// UI tokens — no coloured buttons, no coloured badges, no gradient text. The
+/// restraint is what makes the prism read as light rather than decoration.
 abstract final class AppColors {
   const AppColors._();
 
-  // --- Canvas -------------------------------------------------------------
+  // --- Surfaces -----------------------------------------------------------
 
-  /// The page. Pure black, never off-black or tinted.
-  static const Color void_ = Color(0xFF000000);
+  /// Page canvas. Deep, but not #000 — pure black is what flattens a dark page.
+  static const Color obsidian = Color(0xFF101010);
 
-  /// Elevated panel fill, used sparingly — most surfaces stay black and are
-  /// separated by a border alone.
-  static const Color surfaceLift = Color(0xFF0B0E14);
+  /// Cool slate band behind content sections. The lift that gives the canvas
+  /// depth. Never go lighter than this or bone-white type loses its footing.
+  static const Color graphiteVeil = Color(0xFF495764);
+
+  /// Midpoint between canvas and veil, for gradient transitions between bands.
+  static const Color slateShadow = Color(0xFF1E252C);
+
+  // --- Type ---------------------------------------------------------------
+
+  /// Every piece of type and UI chrome on the dark canvas.
+  static const Color bone = Color(0xFFFFFDF9);
+
+  /// De-emphasised metadata: taxonomy labels, captions, inactive nav.
+  static const Color fog = Color(0xFF6F879C);
+
+  /// Lighter fog for metadata sitting on the slate band, where plain fog is
+  /// too close to its background.
+  static const Color fogOnVeil = Color(0xFFC3CED8);
 
   // --- Lines --------------------------------------------------------------
 
-  /// The 1px hairline that separates every layer. This does the job that
-  /// shadows do elsewhere.
-  static const Color hairline = Color(0xFF292D30);
+  /// Hairline dividers and card outlines. Barely visible by design.
+  static const Color ashBorder = Color(0xFF403F3F);
 
-  /// Hairline under hover/focus — brighter, never colored.
-  static const Color hairlineBright = Color(0xFF52585C);
+  /// Border on the slate band, where ash disappears.
+  static const Color ashOnVeil = Color(0x33FFFDF9);
 
-  // --- Text ---------------------------------------------------------------
+  /// Hover state for any hairline. Brightened, never coloured.
+  static const Color ashBright = Color(0x66FFFDF9);
 
-  /// Headings and hero type.
-  static const Color white = Color(0xFFFFFFFF);
+  // --- Prism --------------------------------------------------------------
+  // Illustration only. Using these on UI breaks the entire system.
 
-  /// Body copy and secondary headings — the main reading color.
-  static const Color bone = Color(0xFFF0F0F0);
+  static const Color prismRed = Color(0xFFFF2A2A);
+  static const Color prismCyan = Color(0xFF2A7FFF);
+  static const Color prismLime = Color(0xFF2AFF2A);
 
-  /// Muted body, metadata, badge labels.
-  static const Color ash = Color(0xFFA1A4A5);
-
-  /// Captions, inactive states, supporting detail.
-  static const Color smoke = Color(0xFF8A8F94);
-
-  /// Text that should recede into the surface — section numbers, footnotes.
-  static const Color iron = Color(0xFF6E727A);
-
-  /// Barely-there labels and decorative strokes.
-  static const Color charcoal = Color(0xFF464A4D);
-
-  // --- Accent -------------------------------------------------------------
-
-  /// The only brand color. Belongs to code, identifiers, inline marks and
-  /// small indicators — never to a button fill, never to a large heading, and
-  /// never as a gradient.
-  static const Color iris = Color(0xFF9281F7);
-
-  /// Lighter violet for text-on-black where [iris] is too dim.
-  static const Color irisGlow = Color(0xFFBAA7FF);
-
-  // --- Status -------------------------------------------------------------
-  // Reserved for data and state indicators only, never for UI chrome.
-
-  static const Color green = Color(0xFF3AD389);
-  static const Color blue = Color(0xFF70B8FF);
-  static const Color amber = Color(0xFFFFCA16);
-  static const Color red = Color(0xFFFF9592);
+  /// The three dispersion channels in draw order.
+  static const List<Color> prism = [prismRed, prismLime, prismCyan];
 }
