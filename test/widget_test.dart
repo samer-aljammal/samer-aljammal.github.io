@@ -71,10 +71,21 @@ void main() {
   testWidgets('footer spells out every profile link', (tester) async {
     await pumpSite(tester);
 
+    // Derived from the profile rather than hardcoded, so changing an address
+    // in one place cannot leave this asserting on a stale one.
+    //
     // findsWidgets, not findsOneWidget: the contact section lists the same
     // handles as a definition list, so each one legitimately appears twice.
-    expect(find.text('github.com/samer-aljammal'), findsWidgets);
-    expect(find.text('samoraaljammal@gmail.com'), findsWidgets);
+    for (final link in ServiceLocator.profile.getProfile().socials) {
+      final label = link.url.startsWith('mailto:')
+          ? link.url.substring(7)
+          : link.url.replaceFirst(RegExp(r'^https?://(www\.)?'), '');
+      expect(
+        find.text(label),
+        findsWidgets,
+        reason: '$label is not spelled out anywhere on the page',
+      );
+    }
   });
 
   testWidgets('nav exposes every section on desktop', (tester) async {

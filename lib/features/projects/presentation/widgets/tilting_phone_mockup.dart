@@ -62,12 +62,31 @@ class _TiltingPhoneMockupState extends State<TiltingPhoneMockup> {
           duration: AppMotion.base,
           curve: AppMotion.ease,
           builder: (BuildContext context, Offset tilt, Widget? child) {
-            return Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.identity()
-                ..setEntry(3, 2, _perspective)
-                ..rotateX(-tilt.dy * _maxTilt)
-                ..rotateY(tilt.dx * _maxTilt),
+            // Hover drives a lift and a small scale alongside the tilt. Tilt
+            // alone is easy to miss when the cursor enters near the centre,
+            // where the rotation is close to zero — the lift makes the device
+            // acknowledge the pointer wherever it arrives.
+            return TweenAnimationBuilder<double>(
+              tween: Tween<double>(end: hovered ? 1 : 0),
+              duration: AppMotion.base,
+              curve: AppMotion.ease,
+              builder: (BuildContext context, double lift, Widget? inner) {
+                return Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()
+                    ..setEntry(3, 2, _perspective)
+                    ..translateByDouble(0, -12 * lift, 0, 1)
+                    ..rotateX(-tilt.dy * _maxTilt)
+                    ..rotateY(tilt.dx * _maxTilt)
+                    ..scaleByDouble(
+                      1 + 0.03 * lift,
+                      1 + 0.03 * lift,
+                      1,
+                      1,
+                    ),
+                  child: inner,
+                );
+              },
               child: child,
             );
           },

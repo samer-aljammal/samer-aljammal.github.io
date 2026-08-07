@@ -64,6 +64,10 @@ class _PrismArtifactState extends State<PrismArtifact>
         child: AnimatedBuilder(
           animation: _controller,
           builder: (BuildContext context, _) => CustomPaint(
+            // Without this the painter collapses to Size.zero whenever its
+            // constraints are not tight — a child-less CustomPaint does not
+            // expand on its own, and the result is a silently blank canvas.
+            size: Size.infinite,
             painter: _PrismPainter(
               t: _controller.value,
               opacity: widget.opacity,

@@ -15,7 +15,7 @@
   <title>Samer Aljammal — Mobile App Developer</title>
   <meta name="description" content="Flutter mobile app developer. Clean, feature-first architecture and responsive interfaces, across messaging, personal finance, food delivery, e-commerce and marketplace apps.">
   <meta name="author" content="Samer Aljammal">
-  <meta name="theme-color" content="#0B0714">
+  <meta name="theme-color" content="#101010">
 
   <!-- Link previews (Twitter/X, LinkedIn, Slack, WhatsApp). -->
   <meta property="og:type" content="website">
@@ -39,7 +39,7 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      background-color: #0B0714;
+      background-color: #101010;
       overflow: hidden;
     }
 
@@ -47,6 +47,11 @@
       Branded loader shown while the Flutter engine downloads. Without it the
       page is a blank white rectangle for the first second or two, which is the
       single worst thing about an un-tuned Flutter web build.
+
+      It has to carry the same identity as the app it precedes: obsidian
+      canvas, bone-white type at weight 400, and the prism's RGB dispersion —
+      here as three channel-offset shadows on the wordmark that drift apart and
+      resolve back to white, the same idea as the artifact in the hero.
     */
     #loading {
       position: fixed;
@@ -55,10 +60,10 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 26px;
-      background: radial-gradient(circle at 30% 25%, #1B1035 0%, #0B0714 55%);
+      gap: 30px;
+      background: #101010;
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-      transition: opacity 500ms ease;
+      transition: opacity 600ms cubic-bezier(0.52, 0.01, 0, 1);
       z-index: 10;
     }
 
@@ -68,36 +73,53 @@
     }
 
     #loading .mark {
-      width: 52px;
-      height: 52px;
-      border-radius: 15px;
-      background: linear-gradient(135deg, #A855F7, #EC4899);
-      box-shadow: 0 8px 40px rgba(168, 88, 247, 0.45);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-weight: 700;
-      font-size: 15px;
-      letter-spacing: 0.5px;
-      animation: pulse 1.9s ease-in-out infinite;
+      font-size: 34px;
+      font-weight: 400;
+      letter-spacing: -0.68px;
+      color: #fffdf9;
+      animation: disperse 6.65s cubic-bezier(0.52, 0.01, 0, 1) infinite;
+    }
+
+    #loading .rule {
+      width: 120px;
+      height: 1px;
+      background: #403f3f;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* A bone sliver traverses the rule — progress that is honest about not
+       knowing the percentage. */
+    #loading .rule::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      width: 40%;
+      background: #fffdf9;
+      animation: traverse 1.9s cubic-bezier(0.52, 0.01, 0, 1) infinite;
     }
 
     #loading .label {
-      color: #6D648A;
-      font-size: 11px;
-      letter-spacing: 2.6px;
+      color: #6f879c;
+      font-size: 12px;
+      letter-spacing: 2.4px;
       text-transform: uppercase;
     }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1);    box-shadow: 0 8px 30px rgba(168, 88, 247, 0.35); }
-      50%      { transform: scale(1.07); box-shadow: 0 8px 52px rgba(236, 72, 153, 0.55); }
+    @keyframes disperse {
+      0%, 100% { text-shadow: 0 0 0 rgba(255,42,42,0), 0 0 0 rgba(42,255,42,0), 0 0 0 rgba(42,127,255,0); }
+      50%      { text-shadow: -3px 0 0 rgba(255,42,42,0.85), 0 0 0 rgba(42,255,42,0.7), 3px 0 0 rgba(42,127,255,0.85); }
     }
 
-    /* Reduced-motion users get the mark without the pulse. */
+    @keyframes traverse {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(350%); }
+    }
+
+    /* Reduced-motion users get the mark and rule without the movement. */
     @media (prefers-reduced-motion: reduce) {
       #loading .mark { animation: none; }
+      #loading .rule::after { animation: none; width: 100%; }
     }
 
     /*
@@ -134,13 +156,14 @@
          crawlers, so the ones that matter are duplicated here. -->
     <p>
       <a href="https://github.com/samer-aljammal">GitHub: samer-aljammal</a>
-      <a href="mailto:samoraaljammal@gmail.com">Email: samoraaljammal@gmail.com</a>
+      <a href="mailto:samerjmml@gmail.com">Email: samerjmml@gmail.com</a>
     </p>
   </div>
 
   <div id="loading">
-    <div class="mark">SA</div>
-    <div class="label">Loading portfolio</div>
+    <div class="mark">Samer Aljammal</div>
+    <div class="rule"></div>
+    <div class="label">Loading</div>
   </div>
 
   <noscript>

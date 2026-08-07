@@ -37,7 +37,7 @@ class LocalProfileRepository implements ProfileRepository {
     ],
 
     location: 'Damascus, Syria',
-    email: 'samoraaljammal@gmail.com',
+    email: 'samerjmml@gmail.com',
 
     // Local Syrian format. Consider '+963 983 896 568' if you want recruiters
     // outside Syria to be able to dial it straight from the page.

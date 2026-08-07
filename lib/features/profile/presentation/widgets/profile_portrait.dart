@@ -6,26 +6,17 @@ import '../../../../core/theme/app_typography.dart';
 import '../../../../core/widgets/hover_region.dart';
 import '../../domain/entities/profile.dart';
 
-/// Editorial portrait: a 4:5 frame with a hairline border, desaturated until
-/// hovered, captioned in mono.
+/// Editorial portrait: a 4:5 plate with a hairline border, always in full
+/// colour, captioned underneath.
 ///
-/// The greyscale-to-colour transition is the point. A circular avatar with a
-/// glowing ring is a profile widget; a rectangular plate that resolves into
-/// colour under the cursor is a photograph, and it belongs to the same
-/// monochrome discipline as the rest of the page.
+/// It used to desaturate until hovered. That is a common editorial device, but
+/// it hides the subject on first read and does nothing at all on touch, where
+/// there is no hover — so the photograph now simply reads as a photograph. The
+/// hover state moved to the frame instead: a brighter rim and a small lift.
 class ProfilePortrait extends StatelessWidget {
   const ProfilePortrait({required this.profile, super.key});
 
   final Profile profile;
-
-  /// Fully desaturating matrix — luminance weights, not a flat average, so
-  /// skin tones keep their natural relative brightness.
-  static const List<double> _greyscale = <double>[
-    0.2126, 0.7152, 0.0722, 0, 0,
-    0.2126, 0.7152, 0.0722, 0, 0,
-    0.2126, 0.7152, 0.0722, 0, 0,
-    0, 0, 0, 1, 0,
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,19 +27,23 @@ class ProfilePortrait extends StatelessWidget {
         HoverRegion(
           builder: (BuildContext context, bool hovered) => AspectRatio(
             aspectRatio: 4 / 5,
-            child: Container(
+            child: AnimatedContainer(
+              duration: AppMotion.base,
+              curve: AppMotion.ease,
+              // Lifts a few pixels under the cursor. The whole hover state now
+              // lives in the frame, since the photograph itself no longer
+              // changes — and a lift still works on touch, where hover cannot.
+              transform: Matrix4.translationValues(0, hovered ? -6 : 0, 0),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: hovered
-                      ? AppColors.ashBright
-                      : AppColors.ashBorder,
+                  color: hovered ? AppColors.ashBright : AppColors.ashBorder,
                 ),
                 borderRadius: BorderRadius.circular(4),
               ),
               padding: const EdgeInsets.all(5),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(2),
-                child: _image(hovered),
+                child: _image(),
               ),
             ),
           ),
@@ -73,11 +68,11 @@ class ProfilePortrait extends StatelessWidget {
     );
   }
 
-  Widget _image(bool hovered) {
+  Widget _image() {
     final String? asset = profile.avatarAsset;
     if (asset == null) return _Fallback(profile: profile);
 
-    final Widget photo = Image.asset(
+    return Image.asset(
       asset,
       fit: BoxFit.cover,
       width: double.infinity,
@@ -85,24 +80,6 @@ class ProfilePortrait extends StatelessWidget {
       filterQuality: FilterQuality.medium,
       errorBuilder: (BuildContext context, Object error, StackTrace? stack) =>
           _Fallback(profile: profile),
-    );
-
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        photo,
-        // The colour copy fades out over the greyscale one, rather than
-        // animating the matrix itself — cheaper, and it cannot flash.
-        AnimatedOpacity(
-          opacity: hovered ? 0 : 1,
-          duration: AppMotion.base,
-          curve: AppMotion.ease,
-          child: ColorFiltered(
-            colorFilter: const ColorFilter.matrix(_greyscale),
-            child: photo,
-          ),
-        ),
-      ],
     );
   }
 }

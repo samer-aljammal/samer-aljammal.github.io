@@ -88,14 +88,19 @@ class HeroSection extends StatelessWidget {
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // On narrow screens the prism sits above the copy at reduced
-                // strength rather than behind it — at phone width it would
-                // otherwise fight the headline for the same pixels.
-                SizedBox(
-                  height: 260,
-                  child: const PrismArtifact(opacity: 0.7),
+                // On narrow screens the prism sits above the copy rather than
+                // behind it — at phone width it would otherwise fight the
+                // headline for the same pixels.
+                //
+                // width: infinity is load-bearing. A CustomPaint with no child
+                // collapses to zero size unless its constraints are tight, so a
+                // height-only SizedBox renders nothing at all.
+                const SizedBox(
+                  width: double.infinity,
+                  height: 300,
+                  child: PrismArtifact(opacity: 0.85),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 44),
                 _Copy(
                   profile: profile,
                   onViewWork: onViewWork,
