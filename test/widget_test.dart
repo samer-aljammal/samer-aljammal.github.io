@@ -47,15 +47,18 @@ void main() {
     expect(find.text(profile.name), findsWidgets);
     expect(find.text('Available for work'), findsOneWidget);
 
-    // Scoped to the hero: the highlight phrase may legitimately recur in the
-    // bio copy further down the page.
-    expect(
-      find.descendant(
-        of: find.byType(HeroSection),
-        matching: find.textContaining(profile.heroHighlight),
-      ),
-      findsOneWidget,
-    );
+    // Each authored headline line is rendered as its own masked Text, scoped
+    // to the hero since the wording may recur in the copy further down.
+    for (final String line in profile.heroLines) {
+      expect(
+        find.descendant(
+          of: find.byType(HeroSection),
+          matching: find.text(line),
+        ),
+        findsOneWidget,
+        reason: 'hero headline line "$line" is missing',
+      );
+    }
   });
 
   testWidgets('renders a phone mockup in the hero', (tester) async {
@@ -68,9 +71,9 @@ void main() {
   testWidgets('footer spells out every profile link', (tester) async {
     await pumpSite(tester);
 
-    // Icon tiles elsewhere on the page are not readable; the footer is where
-    // the handle itself has to be visible.
-    expect(find.text('github.com/samer-aljammal'), findsOneWidget);
+    // findsWidgets, not findsOneWidget: the contact section lists the same
+    // handles as a definition list, so each one legitimately appears twice.
+    expect(find.text('github.com/samer-aljammal'), findsWidgets);
     expect(find.text('samoraaljammal@gmail.com'), findsWidgets);
   });
 
@@ -86,13 +89,13 @@ void main() {
   testWidgets('nav collapses to a menu button on mobile', (tester) async {
     await pumpSite(tester, size: const Size(420, 900));
 
-    expect(find.byIcon(Icons.menu_rounded), findsOneWidget);
+    expect(find.byIcon(Icons.menu), findsOneWidget);
   });
 
   testWidgets('offers both hero calls to action', (tester) async {
     await pumpSite(tester);
 
-    expect(find.text('View my work'), findsOneWidget);
+    expect(find.text('View work'), findsOneWidget);
     expect(find.text('Get in touch'), findsOneWidget);
   });
 
@@ -239,7 +242,7 @@ void main() {
     await pumpSite(tester);
 
     final hasCv = ServiceLocator.profile.getProfile().cvUrl != null;
-    expect(find.text('Download CV'), hasCv ? findsOneWidget : findsNothing);
+    expect(find.text('CV'), hasCv ? findsOneWidget : findsNothing);
   });
 
   test('every declared screenshot exists on disk', () {

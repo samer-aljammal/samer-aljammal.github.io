@@ -8,46 +8,45 @@ abstract final class AppTheme {
 
   static ThemeData dark() {
     const ColorScheme scheme = ColorScheme.dark(
-      primary: AppColors.violet,
-      onPrimary: Colors.white,
-      secondary: AppColors.magenta,
-      onSecondary: Colors.white,
-      surface: AppColors.background,
-      onSurface: AppColors.textPrimary,
-      surfaceContainerHighest: AppColors.surfaceHigh,
-      outline: AppColors.border,
+      primary: AppColors.white,
+      onPrimary: AppColors.void_,
+      secondary: AppColors.iris,
+      onSecondary: AppColors.white,
+      surface: AppColors.void_,
+      onSurface: AppColors.bone,
+      outline: AppColors.hairline,
     );
 
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
       colorScheme: scheme,
-      scaffoldBackgroundColor: AppColors.background,
-      canvasColor: AppColors.background,
+      scaffoldBackgroundColor: AppColors.void_,
+      canvasColor: AppColors.void_,
       textTheme: AppTypography.textTheme(),
+      // No ripples anywhere: Material ink on an editorial layout is the fastest
+      // way to make a custom design look like a default one.
       splashFactory: NoSplash.splashFactory,
-      // The whole page is one scroll surface; a stretch/glow overscroll on a
-      // marketing site reads as a bug, so suppress it.
-      scrollbarTheme: ScrollbarThemeData(
-        thumbColor: WidgetStateProperty.all(
-          AppColors.violet.withValues(alpha: 0.4),
-        ),
-        thickness: WidgetStateProperty.all(6),
-        radius: const Radius.circular(3),
-      ),
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
       dividerTheme: const DividerThemeData(
-        color: AppColors.border,
+        color: AppColors.hairline,
         thickness: 1,
         space: 1,
       ),
-      iconTheme: const IconThemeData(color: AppColors.textSecondary, size: 20),
+      iconTheme: const IconThemeData(color: AppColors.ash, size: 18),
+      scrollbarTheme: ScrollbarThemeData(
+        thumbColor: WidgetStateProperty.all(AppColors.charcoal),
+        thickness: WidgetStateProperty.all(4),
+        radius: const Radius.circular(2),
+      ),
       tooltipTheme: TooltipThemeData(
         decoration: BoxDecoration(
-          color: AppColors.surfaceHigh,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: AppColors.border),
+          color: AppColors.void_,
+          border: Border.all(color: AppColors.hairline),
+          borderRadius: BorderRadius.circular(6),
         ),
-        textStyle: AppTypography.mono(color: AppColors.textPrimary),
+        textStyle: AppTypography.mono(color: AppColors.bone, fontSize: 11),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       ),
     );

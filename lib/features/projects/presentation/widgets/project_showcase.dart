@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 import '../../../../core/responsive/breakpoints.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
+import '../../../../core/utils/link_launcher.dart';
+import '../../../../core/widgets/mono_badge.dart';
 import '../../../../core/widgets/reveal_on_scroll.dart';
-import '../../../../core/widgets/tech_chip.dart';
+import '../../../../core/widgets/underline_link.dart';
 import '../../domain/entities/project.dart';
-import 'project_link_button.dart';
 import 'tilting_phone_mockup.dart';
 
-/// One project: live phone mockup on one side, the write-up on the other.
+/// One project, laid out as an editorial spread: a numbered hairline rule, an
+/// oversized serif title, mono metadata, and the live device alongside.
 ///
-/// Sides alternate down the page so the eye zig-zags instead of scanning a
-/// single column of identical cards.
+/// Sides alternate down the page so the eye zig-zags rather than scanning a
+/// column of identical cards — the layout does the work that a card border and
+/// a drop shadow used to.
 class ProjectShowcase extends StatelessWidget {
   const ProjectShowcase({
     required this.project,
@@ -21,15 +24,12 @@ class ProjectShowcase extends StatelessWidget {
   });
 
   final Project project;
-
-  /// Zero-based position, used for the displayed number and the alternation.
   final int index;
 
   @override
   Widget build(BuildContext context) {
-    final bool mockupOnRight = index.isEven;
-
-    final Widget mockup = _Mockup(project: project);
+    final bool deviceRight = index.isEven;
+    final Widget device = _Device(project: project);
     final Widget details = _Details(project: project, index: index);
 
     if (!context.isWide) {
@@ -38,8 +38,8 @@ class ProjectShowcase extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             details,
-            const SizedBox(height: 44),
-            Center(child: mockup),
+            const SizedBox(height: 48),
+            Center(child: device),
           ],
         ),
       );
@@ -48,24 +48,24 @@ class ProjectShowcase extends StatelessWidget {
     return RevealOnScroll(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          if (mockupOnRight) ...[
-            Expanded(flex: 6, child: details),
-            const SizedBox(width: 48),
-            Expanded(flex: 5, child: mockup),
-          ] else ...[
-            Expanded(flex: 5, child: mockup),
-            const SizedBox(width: 48),
-            Expanded(flex: 6, child: details),
-          ],
-        ],
+        children: deviceRight
+            ? [
+                Expanded(flex: 7, child: details),
+                const SizedBox(width: 64),
+                Expanded(flex: 4, child: Center(child: device)),
+              ]
+            : [
+                Expanded(flex: 4, child: Center(child: device)),
+                const SizedBox(width: 64),
+                Expanded(flex: 7, child: details),
+              ],
       ),
     );
   }
 }
 
-class _Mockup extends StatelessWidget {
-  const _Mockup({required this.project});
+class _Device extends StatelessWidget {
+  const _Device({required this.project});
 
   final Project project;
 
@@ -74,9 +74,9 @@ class _Mockup extends StatelessWidget {
     return TiltingPhoneMockup.project(
       project: project,
       width: context.responsive<double>(
-        mobile: 218,
-        tablet: 248,
-        desktop: 272,
+        mobile: 208,
+        tablet: 236,
+        desktop: 252,
       ),
     );
   }
@@ -91,6 +91,11 @@ class _Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme text = Theme.of(context).textTheme;
+    final double titleSize = context.responsive<double>(
+      mobile: 38,
+      tablet: 46,
+      desktop: 54,
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,99 +104,65 @@ class _Details extends StatelessWidget {
           children: [
             Text(
               (index + 1).toString().padLeft(2, '0'),
-              style: AppTypography.mono(
-                fontSize: 13,
-                color: project.accent,
-                letterSpacing: 2,
-              ),
+              style: AppTypography.label(color: AppColors.iron),
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Container(
-                height: 1,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      project.accent.withValues(alpha: 0.5),
-                      Colors.transparent,
-                    ],
-                  ),
-                ),
+            const SizedBox(width: 16),
+            const Expanded(child: Divider(height: 1)),
+            if (project.isCollaboration) ...[
+              const SizedBox(width: 16),
+              Text(
+                'COLLABORATION',
+                style: AppTypography.label(color: AppColors.iris),
               ),
-            ),
+            ],
           ],
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 22),
 
-        Wrap(
-          crossAxisAlignment: WrapCrossAlignment.center,
-          spacing: 14,
-          runSpacing: 8,
-          children: [
-            Text(project.name, style: text.headlineMedium),
-            if (project.isCollaboration)
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 5,
-                ),
-                decoration: BoxDecoration(
-                  color: project.accent.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(100),
-                  border: Border.all(
-                    color: project.accent.withValues(alpha: 0.4),
-                  ),
-                ),
-                child: Text(
-                  'COLLABORATION',
-                  style: AppTypography.mono(
-                    fontSize: 10,
-                    letterSpacing: 1.4,
-                    color: project.accent,
-                  ),
-                ),
-              ),
-          ],
+        Text(
+          project.name,
+          style: AppTypography.display(fontSize: titleSize, height: 1.05),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 10),
         Text(
           project.tagline,
-          style: text.titleMedium?.copyWith(color: project.accent),
+          style: AppTypography.mono(fontSize: 13, color: AppColors.smoke),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 24),
 
-        Text(
-          project.description,
-          style: text.bodyMedium?.copyWith(color: AppColors.textSecondary),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 540),
+          child: Text(
+            project.description,
+            style: text.bodyMedium?.copyWith(color: AppColors.ash),
+          ),
         ),
 
         if (project.highlights.isNotEmpty) ...[
-          const SizedBox(height: 24),
+          const SizedBox(height: 28),
           for (final String highlight in project.highlights)
             Padding(
-              padding: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(bottom: 12),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // A mono arrow rather than a colored bullet: the list reads
+                  // like terminal output, which is the identity of the page.
                   Padding(
-                    // Optically centers the marker on the first text line.
-                    padding: const EdgeInsets.only(top: 7),
-                    child: Container(
-                      width: 5,
-                      height: 5,
-                      decoration: BoxDecoration(
-                        color: project.accent,
-                        shape: BoxShape.circle,
+                    padding: const EdgeInsets.only(top: 2),
+                    child: Text(
+                      '→',
+                      style: AppTypography.mono(
+                        fontSize: 13,
+                        color: AppColors.charcoal,
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 14),
                   Expanded(
                     child: Text(
                       highlight,
-                      style: text.bodyMedium?.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
+                      style: text.bodySmall?.copyWith(color: AppColors.smoke),
                     ),
                   ),
                 ],
@@ -199,38 +170,38 @@ class _Details extends StatelessWidget {
             ),
         ],
 
-        const SizedBox(height: 26),
+        const SizedBox(height: 28),
         Wrap(
           spacing: 8,
           runSpacing: 8,
           children: [
-            for (final String tech in project.tech) TechChip(tech, dense: true),
+            for (final String tech in project.tech) MonoBadge(tech),
           ],
         ),
 
         if (project.hasLinks) ...[
-          const SizedBox(height: 28),
+          const SizedBox(height: 32),
           Wrap(
-            spacing: 28,
+            spacing: 32,
             runSpacing: 16,
             children: [
+              if (project.repoUrl case final String url)
+                UnderlineLink(
+                  label: 'Source',
+                  icon: Icons.arrow_outward,
+                  onTap: () => LinkLauncher.open(url),
+                ),
               if (project.liveUrl case final String url)
-                ProjectLinkButton(
+                UnderlineLink(
                   label: 'Live demo',
-                  url: url,
-                  icon: Icons.arrow_outward_rounded,
+                  icon: Icons.arrow_outward,
+                  onTap: () => LinkLauncher.open(url),
                 ),
               if (project.storeUrl case final String url)
-                ProjectLinkButton(
+                UnderlineLink(
                   label: 'App store',
-                  url: url,
-                  icon: Icons.shop_outlined,
-                ),
-              if (project.repoUrl case final String url)
-                ProjectLinkButton(
-                  label: 'Source',
-                  url: url,
-                  icon: Icons.code_rounded,
+                  icon: Icons.arrow_outward,
+                  onTap: () => LinkLauncher.open(url),
                 ),
             ],
           ),

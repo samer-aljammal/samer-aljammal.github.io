@@ -81,7 +81,7 @@ class _ProjectScreenReelState extends State<ProjectScreenReel>
     if (local <= _dwellFraction) return index.toDouble();
 
     final double transition = (local - _dwellFraction) / (1 - _dwellFraction);
-    return index + AppMotion.emphasized.transform(transition);
+    return index + AppMotion.easeStrong.transform(transition);
   }
 
   @override

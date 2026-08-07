@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/responsive/breakpoints.dart';
+import '../../../core/widgets/section_heading.dart';
 import '../../../core/widgets/section_shell.dart';
-import '../../../core/widgets/section_title.dart';
 import '../domain/entities/project.dart';
 import 'widgets/project_showcase.dart';
 
@@ -13,22 +13,26 @@ class ProjectsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double gap = context.responsive(mobile: 96, tablet: 120, desktop: 140);
+    final double gap = context.responsive<double>(
+      mobile: 104,
+      tablet: 132,
+      desktop: 160,
+    );
 
     return SectionShell(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SectionTitle(
-            eyebrow: '02 — Work',
-            title: 'Things I have',
-            highlight: 'shipped.',
-            subtitle:
-                'Messaging, personal finance, food delivery, e-commerce and '
-                'marketplace apps. Every screen below is the real thing — hover '
-                'a phone to take a closer look.',
+          const SectionHeading(
+            index: '02',
+            label: 'Work',
+            lines: ['Shipped, not', 'sketched.'],
+            trailing:
+                'Messaging, personal finance, food delivery, commerce and '
+                'marketplace. Every screen below is the real application. '
+                'Hover a device to look closer.',
           ),
-          SizedBox(height: gap * 0.72),
+          SizedBox(height: gap * 0.8),
 
           for (final (int index, Project project) in projects.indexed)
             Padding(

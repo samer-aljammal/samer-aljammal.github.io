@@ -26,8 +26,7 @@ class Profile {
   const Profile({
     required this.name,
     required this.role,
-    required this.heroHeadline,
-    required this.heroHighlight,
+    required this.heroLines,
     required this.heroSubtitle,
     required this.bio,
     required this.location,
@@ -45,11 +44,13 @@ class Profile {
   /// Short professional title, e.g. "Flutter Developer".
   final String role;
 
-  /// Hero heading, minus the gradient tail.
-  final String heroHeadline;
-
-  /// Tail of the hero heading, painted in the accent gradient.
-  final String heroHighlight;
+  /// Hero headline, one entry per rendered line.
+  ///
+  /// Breaks are authored rather than wrapped: the line-reveal mask needs to
+  /// know where they fall, and a hand-set break is what makes a large serif
+  /// headline scan properly. Keep each line short enough not to overflow the
+  /// hero column at the desktop display size.
+  final List<String> heroLines;
 
   final String heroSubtitle;
 

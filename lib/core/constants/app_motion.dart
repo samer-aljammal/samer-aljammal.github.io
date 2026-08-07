@@ -1,36 +1,38 @@
 import 'package:flutter/animation.dart';
 
-/// Every duration and curve in the app, in one place.
+/// Motion vocabulary.
 ///
-/// Motion only feels designed when it's consistent, so widgets never invent
-/// their own timings — they pick a role from here.
+/// The rule this design follows: motion is frequent but quiet. Hover feedback
+/// is near-instant (150ms), entrances are slow and travel a short distance, and
+/// nothing bounces, pulses or glows. Elastic curves and long springs are what
+/// make a page feel generated; a tight ease-out feels engineered.
 abstract final class AppMotion {
   const AppMotion._();
 
-  /// Hover/press feedback. Must feel instantaneous.
-  static const Duration fast = Duration(milliseconds: 180);
+  /// Hover and focus feedback. Anything slower feels laggy on a cursor.
+  static const Duration hover = Duration(milliseconds: 150);
 
-  /// Standard state change: color, elevation, layout nudge.
-  static const Duration medium = Duration(milliseconds: 320);
+  /// Standard state change.
+  static const Duration base = Duration(milliseconds: 280);
 
-  /// Entrance animations for revealed content.
-  static const Duration slow = Duration(milliseconds: 620);
+  /// Entrance of a revealed element.
+  static const Duration enter = Duration(milliseconds: 720);
 
-  /// Scroll-to-section.
-  static const Duration navigate = Duration(milliseconds: 850);
+  /// Smooth scroll to a section.
+  static const Duration navigate = Duration(milliseconds: 900);
 
-  /// One full loop of a screenshot column inside the phone frame, per screen.
+  /// Delay between lines in a headline reveal, and between sibling cards.
+  static const Duration stagger = Duration(milliseconds: 70);
+
+  /// One full pass of the technology marquee.
+  static const Duration marquee = Duration(seconds: 38);
+
+  /// Dwell on one screen inside a phone mockup before it advances.
   static const Duration phoneScrollPerScreen = Duration(milliseconds: 2600);
 
-  /// One full cycle of the ambient background orbs. Deliberately very long so
-  /// the movement is felt rather than watched.
-  static const Duration ambient = Duration(seconds: 34);
+  /// Standard easing — decelerate into place, never overshoot.
+  static const Curve ease = Curves.easeOutCubic;
 
-  /// Delay between siblings in a staggered reveal.
-  static const Duration stagger = Duration(milliseconds: 90);
-
-  static const Curve enter = Curves.easeOutCubic;
-  static const Curve exit = Curves.easeInCubic;
-  static const Curve emphasized = Curves.easeOutQuint;
-  static const Curve spring = Curves.elasticOut;
+  /// Stronger deceleration for large travel (headline lines, section blocks).
+  static const Curve easeStrong = Curves.easeOutQuint;
 }

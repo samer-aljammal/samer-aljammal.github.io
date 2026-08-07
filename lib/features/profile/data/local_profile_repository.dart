@@ -18,12 +18,12 @@ class LocalProfileRepository implements ProfileRepository {
     name: 'Samer Aljammal',
     role: 'Mobile App Developer',
 
-    heroHeadline: 'I build mobile apps that feel',
-    heroHighlight: 'effortless.',
+    // Three short lines: each is masked and revealed separately, and each must
+    // fit the hero column on one line at the desktop display size.
+    heroLines: ['I build mobile', 'apps that feel', 'effortless.'],
     heroSubtitle:
-        'Mobile developer working in Flutter — clean, layered codebases that '
-        'stay easy to change, and interfaces that hold their shape on every '
-        'screen size.',
+        'Flutter developer. Clean, layered codebases that stay easy to change '
+        '— and interfaces that hold their shape on every screen size.',
 
     // Your words, unedited. Split into three entries so each sentence gets its
     // own line and the section stays airy rather than becoming a paragraph.

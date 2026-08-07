@@ -1,73 +1,68 @@
 import 'package:flutter/material.dart';
 
-/// The violet/magenta neon palette.
+/// Monochrome-with-one-accent palette.
 ///
-/// Everything visual pulls from here — no raw hex literals anywhere else in the
-/// app, so re-theming the whole site means editing this one file.
+/// The discipline here is deliberate and it is the whole design: a flat black
+/// canvas, hairline borders instead of shadows, four tiers of grey text, and a
+/// single violet reserved for code and identifiers. No gradients on surfaces,
+/// no glows, no tinted card fills — those read as generated rather than
+/// designed, which is exactly what this replaced.
 abstract final class AppColors {
   const AppColors._();
 
-  // --- Surfaces -------------------------------------------------------------
+  // --- Canvas -------------------------------------------------------------
 
-  /// Deep plum page background.
-  static const Color background = Color(0xFF0B0714);
+  /// The page. Pure black, never off-black or tinted.
+  static const Color void_ = Color(0xFF000000);
 
-  /// Raised panels: cards, nav bar, input fields.
-  static const Color surface = Color(0xFF16102A);
+  /// Elevated panel fill, used sparingly — most surfaces stay black and are
+  /// separated by a border alone.
+  static const Color surfaceLift = Color(0xFF0B0E14);
 
-  /// Hover/pressed state for anything sitting on [surface].
-  static const Color surfaceHigh = Color(0xFF1E1638);
+  // --- Lines --------------------------------------------------------------
 
-  /// The device bezel and other "solid object" fills.
-  static const Color bezel = Color(0xFF080510);
+  /// The 1px hairline that separates every layer. This does the job that
+  /// shadows do elsewhere.
+  static const Color hairline = Color(0xFF292D30);
 
-  // --- Accents --------------------------------------------------------------
+  /// Hairline under hover/focus — brighter, never colored.
+  static const Color hairlineBright = Color(0xFF52585C);
 
-  static const Color violet = Color(0xFFA855F7);
-  static const Color magenta = Color(0xFFEC4899);
+  // --- Text ---------------------------------------------------------------
 
-  /// Cooler violet used for the far end of ambient glows.
-  static const Color indigo = Color(0xFF6366F1);
+  /// Headings and hero type.
+  static const Color white = Color(0xFFFFFFFF);
 
-  // --- Text -----------------------------------------------------------------
+  /// Body copy and secondary headings — the main reading color.
+  static const Color bone = Color(0xFFF0F0F0);
 
-  static const Color textPrimary = Color(0xFFF4F1FB);
-  static const Color textSecondary = Color(0xFF9C93B8);
-  static const Color textTertiary = Color(0xFF6D648A);
+  /// Muted body, metadata, badge labels.
+  static const Color ash = Color(0xFFA1A4A5);
 
-  // --- Lines ----------------------------------------------------------------
+  /// Captions, inactive states, supporting detail.
+  static const Color smoke = Color(0xFF8A8F94);
 
-  static const Color border = Color(0x1FFFFFFF);
-  static const Color borderStrong = Color(0x3DA855F7);
+  /// Text that should recede into the surface — section numbers, footnotes.
+  static const Color iron = Color(0xFF6E727A);
 
-  // --- Gradients ------------------------------------------------------------
+  /// Barely-there labels and decorative strokes.
+  static const Color charcoal = Color(0xFF464A4D);
 
-  /// The signature violet to magenta sweep. Used on headings, buttons, rules.
-  static const LinearGradient accent = LinearGradient(
-    colors: [violet, magenta],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
+  // --- Accent -------------------------------------------------------------
 
-  /// Subtle top-lit sheen for cards, so panels read as physical surfaces.
-  static const LinearGradient cardSheen = LinearGradient(
-    colors: [Color(0x14FFFFFF), Color(0x00FFFFFF)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomCenter,
-  );
+  /// The only brand color. Belongs to code, identifiers, inline marks and
+  /// small indicators — never to a button fill, never to a large heading, and
+  /// never as a gradient.
+  static const Color iris = Color(0xFF9281F7);
 
-  /// Ambient background orbs, in draw order.
-  static const List<Color> orbs = [violet, magenta, indigo];
+  /// Lighter violet for text-on-black where [iris] is too dim.
+  static const Color irisGlow = Color(0xFFBAA7FF);
 
-  // --- Effects --------------------------------------------------------------
+  // --- Status -------------------------------------------------------------
+  // Reserved for data and state indicators only, never for UI chrome.
 
-  /// Glow cast by an accent-colored element on hover.
-  static List<BoxShadow> glow(Color color, {double strength = 1}) => [
-    BoxShadow(
-      color: color.withValues(alpha: 0.35 * strength),
-      blurRadius: 28 * strength,
-      spreadRadius: -4,
-      offset: const Offset(0, 8),
-    ),
-  ];
+  static const Color green = Color(0xFF3AD389);
+  static const Color blue = Color(0xFF70B8FF);
+  static const Color amber = Color(0xFFFFCA16);
+  static const Color red = Color(0xFFFF9592);
 }

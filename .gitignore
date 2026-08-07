@@ -36,6 +36,10 @@ migrate_working_dir/
 # to build the site, and these originals are ~19 MB — enough to slow every
 # clone and CI checkout. Keep your own backup of this folder.
 /screenshots_src/
+
+# Contains a plaintext 21st.dev API key. This repository is PUBLIC — committing
+# this file would publish the key to anyone who looks.
+/.mcp.json
 /coverage/
 
 # Symbolication related

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 
 import '../constants/app_motion.dart';
@@ -11,8 +13,8 @@ class RevealOnScroll extends StatefulWidget {
   const RevealOnScroll({
     required this.child,
     this.delay = Duration.zero,
-    this.offset = const Offset(0, 0.16),
-    this.duration = AppMotion.slow,
+    this.offset = const Offset(0, 0.10),
+    this.duration = AppMotion.enter,
     super.key,
   });
 
@@ -49,6 +51,10 @@ class _RevealOnScrollState extends State<RevealOnScroll>
     with ScrollVisibility {
   bool _revealed = false;
 
+  /// Held so it can be cancelled on dispose. A bare Future.delayed cannot be,
+  /// and leaves a pending timer behind when the tree goes away mid-stagger.
+  Timer? _delayTimer;
+
   @override
   void onVisibilityChanged(bool visible) {
     if (!visible || _revealed) return;
@@ -57,9 +63,16 @@ class _RevealOnScrollState extends State<RevealOnScroll>
       setState(() => _revealed = true);
       return;
     }
-    Future<void>.delayed(widget.delay, () {
+    _delayTimer?.cancel();
+    _delayTimer = Timer(widget.delay, () {
       if (mounted) setState(() => _revealed = true);
     });
+  }
+
+  @override
+  void dispose() {
+    _delayTimer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -67,11 +80,11 @@ class _RevealOnScrollState extends State<RevealOnScroll>
     return AnimatedSlide(
       offset: _revealed ? Offset.zero : widget.offset,
       duration: widget.duration,
-      curve: AppMotion.emphasized,
+      curve: AppMotion.easeStrong,
       child: AnimatedOpacity(
         opacity: _revealed ? 1 : 0,
         duration: widget.duration,
-        curve: AppMotion.enter,
+        curve: AppMotion.ease,
         child: widget.child,
       ),
     );

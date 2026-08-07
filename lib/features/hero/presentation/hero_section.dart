@@ -3,20 +3,22 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/app_motion.dart';
 import '../../../core/responsive/breakpoints.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_typography.dart';
 import '../../../core/utils/link_launcher.dart';
-import '../../../core/widgets/glow_button.dart';
-import '../../../core/widgets/highlighted_text.dart';
+import '../../../core/widgets/ghost_button.dart';
+import '../../../core/widgets/line_reveal.dart';
 import '../../../core/widgets/reveal_on_scroll.dart';
 import '../../../core/widgets/section_shell.dart';
 import '../../profile/domain/entities/profile.dart';
-import '../../profile/presentation/widgets/social_row.dart';
 import '../../projects/presentation/models/phone_screen.dart';
 import '../../projects/presentation/widgets/tilting_phone_mockup.dart';
-import 'widgets/availability_badge.dart';
-import 'widgets/scroll_cue.dart';
+import 'widgets/status_pill.dart';
 
-/// Above-the-fold introduction, with the featured project already animating in
-/// a phone beside the copy.
+/// Above the fold: an editorial serif statement, a mono sub-line, two ghost
+/// actions, and the work already moving in a device beside it.
+///
+/// No gradient wash, no glow, no illustration — the type and the product are
+/// the only things on the canvas.
 class HeroSection extends StatelessWidget {
   const HeroSection({
     required this.profile,
@@ -27,11 +29,7 @@ class HeroSection extends StatelessWidget {
   });
 
   final Profile profile;
-
-  /// Screens cycled by the hero mockup — a shuffled mix across every project,
-  /// so the first thing a visitor sees is the range of work, not one app.
   final List<PhoneScreen> showcaseScreens;
-
   final VoidCallback onViewWork;
   final VoidCallback onContact;
 
@@ -41,64 +39,39 @@ class HeroSection extends StatelessWidget {
 
     return SectionShell(
       topSpacing: context.responsive<double>(
-        mobile: 112,
-        tablet: 124,
-        desktop: 128,
+        mobile: 132,
+        tablet: 150,
+        desktop: 168,
       ),
       bottomSpacing: context.responsive<double>(
-        mobile: 40,
-        tablet: 52,
-        desktop: 56,
+        mobile: 72,
+        tablet: 88,
+        desktop: 104,
       ),
-      child: ConstrainedBox(
-        // Fills the first viewport on desktop without forcing a fixed height
-        // that could clip the copy on short windows.
-        constraints: BoxConstraints(
-          minHeight: wide ? context.screen.height * 0.66 : 0,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (wide)
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 7,
-                    child: _Copy(
-                      profile: profile,
-                      onViewWork: onViewWork,
-                      onContact: onContact,
-                    ),
-                  ),
-                  const SizedBox(width: 48),
-                  Expanded(flex: 5, child: _Mockup(screens: showcaseScreens)),
-                ],
-              )
-            else
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _Copy(
-                    profile: profile,
-                    onViewWork: onViewWork,
-                    onContact: onContact,
-                  ),
-                  const SizedBox(height: 64),
-                  _Mockup(screens: showcaseScreens),
-                ],
-              ),
-            if (wide) ...[
-              const SizedBox(height: 56),
-              const RevealOnScroll(
-                delay: Duration(milliseconds: 900),
-                child: ScrollCue(),
-              ),
-            ],
-          ],
-        ),
-      ),
+      child: wide
+          ? Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(flex: 7, child: _Copy(profile: profile, onViewWork: onViewWork, onContact: onContact)),
+                const SizedBox(width: 56),
+                Expanded(
+                  flex: 4,
+                  child: Center(child: _Device(screens: showcaseScreens)),
+                ),
+              ],
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _Copy(
+                  profile: profile,
+                  onViewWork: onViewWork,
+                  onContact: onContact,
+                ),
+                const SizedBox(height: 72),
+                Center(child: _Device(screens: showcaseScreens)),
+              ],
+            ),
     );
   }
 }
@@ -116,102 +89,108 @@ class _Copy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextTheme text = Theme.of(context).textTheme;
-    final TextStyle? headlineStyle = context.responsive(
-      mobile: text.displayMedium?.copyWith(fontSize: 40),
-      tablet: text.displayMedium,
-      desktop: text.displayLarge,
+    final double displaySize = context.responsive<double>(
+      mobile: 46,
+      tablet: 64,
+      desktop: 82,
     );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        RevealOnScroll(
-          child: AvailabilityBadge(label: 'Available for work'),
+        const RevealOnScroll(child: StatusPill(label: 'Available for work')),
+        const SizedBox(height: 32),
+
+        // Line breaks are authored, not wrapped: the mask needs to know where
+        // they are, and a hand-set break is what makes the headline scan.
+        LineReveal(
+          lines: profile.heroLines,
+          style: AppTypography.display(fontSize: displaySize, height: 1.04),
         ),
         const SizedBox(height: 28),
 
-        // Headline is revealed as one block: splitting it per-line makes the
-        // most important text on the page arrive in pieces.
         RevealOnScroll(
-          delay: AppMotion.stagger,
-          child: HighlightedText(
-            text: profile.heroHeadline,
-            highlight: profile.heroHighlight,
-            style: headlineStyle,
-          ),
-        ),
-        const SizedBox(height: 26),
-
-        RevealOnScroll(
-          delay: AppMotion.stagger * 2,
+          delay: const Duration(milliseconds: 220),
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 560),
+            constraints: const BoxConstraints(maxWidth: 520),
             child: Text(
               profile.heroSubtitle,
-              style: text.bodyLarge?.copyWith(color: AppColors.textSecondary),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: AppColors.ash),
             ),
           ),
         ),
         const SizedBox(height: 40),
 
         RevealOnScroll(
-          delay: AppMotion.stagger * 3,
+          delay: const Duration(milliseconds: 300),
           child: Wrap(
-            spacing: 14,
-            runSpacing: 14,
+            spacing: 12,
+            runSpacing: 12,
             children: [
-              GlowButton(
-                label: 'View my work',
-                icon: Icons.arrow_downward_rounded,
+              GhostButton(
+                label: 'View work',
+                icon: Icons.arrow_downward,
+                emphasis: true,
                 onPressed: onViewWork,
               ),
-              GlowButton(
-                label: 'Get in touch',
-                icon: Icons.arrow_outward_rounded,
-                variant: GlowButtonVariant.ghost,
-                onPressed: onContact,
-              ),
+              GhostButton(label: 'Get in touch', onPressed: onContact),
               if (profile.cvUrl case final String cvUrl)
-                GlowButton(
-                  label: 'Download CV',
-                  icon: Icons.download_rounded,
-                  variant: GlowButtonVariant.ghost,
+                GhostButton(
+                  label: 'CV',
+                  icon: Icons.arrow_outward,
                   onPressed: () => LinkLauncher.open(cvUrl),
                 ),
             ],
           ),
         ),
-        const SizedBox(height: 40),
+        const SizedBox(height: 44),
 
         RevealOnScroll(
-          delay: AppMotion.stagger * 4,
-          child: SocialRow(links: profile.socials),
+          delay: const Duration(milliseconds: 380),
+          // Wrap, not Row: on a narrow phone the role and location together
+          // exceed the viewport, and a meta line is exactly the kind of thing
+          // that should fold onto a second line rather than clip.
+          child: Wrap(
+            spacing: 14,
+            runSpacing: 10,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              Text(
+                profile.role.toUpperCase(),
+                style: AppTypography.label(color: AppColors.iron),
+              ),
+              Container(width: 28, height: 1, color: AppColors.hairline),
+              Text(
+                profile.location.toUpperCase(),
+                style: AppTypography.label(color: AppColors.iron),
+              ),
+            ],
+          ),
         ),
       ],
     );
   }
 }
 
-class _Mockup extends StatelessWidget {
-  const _Mockup({required this.screens});
+class _Device extends StatelessWidget {
+  const _Device({required this.screens});
 
   final List<PhoneScreen> screens;
 
   @override
   Widget build(BuildContext context) {
     return RevealOnScroll(
-      delay: AppMotion.stagger * 3,
-      offset: const Offset(0, 0.08),
-      child: Align(
-        alignment: context.isWide ? Alignment.center : Alignment.topCenter,
-        child: TiltingPhoneMockup(
-          screens: screens,
-          width: context.responsive<double>(
-            mobile: 232,
-            tablet: 262,
-            desktop: 292,
-          ),
+      delay: AppMotion.stagger * 4,
+      offset: const Offset(0, 0.06),
+      child: TiltingPhoneMockup(
+        screens: screens,
+        width: context.responsive<double>(
+          mobile: 220,
+          tablet: 248,
+          desktop: 268,
         ),
       ),
     );
