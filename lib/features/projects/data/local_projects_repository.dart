@@ -19,6 +19,43 @@ class LocalProjectsRepository implements ProjectsRepository {
 
   @override
   List<Project> getProjects() => const [
+    // First on the page: the deepest piece of engineering here, and the only
+    // one whose selling points are architectural rather than featural.
+    Project(
+      id: 'nexaai',
+      name: 'Nexa AI',
+      tagline: 'Cross-platform AI assistant',
+      description:
+          'A production AI assistant built provider-agnostically: Claude, '
+          'Gemini, an OpenAI-compatible endpoint and a mock all sit behind one '
+          'interface, so switching model vendors is a single line rather than a '
+          'migration. Replies stream token by token over a hand-written '
+          'Server-Sent Events parser, and the whole app stays usable with no '
+          'backend configured at all.',
+      tech: ['Flutter', 'Clean Architecture', 'BLoC', 'SSE streaming'],
+      highlights: [
+        'Four interchangeable AI adapters behind one interface — no vendor '
+            'payload format leaks above the service boundary',
+        'Token-by-token streaming over a hand-written SSE parser that handles '
+            'partial chunks and mid-stream errors',
+        'A sealed Result type forces every caller to handle the failure branch, '
+            'with a retryable flag so retry is only offered when it can work',
+        '73 passing tests, against a domain layer with zero Flutter, Firebase '
+            'or dart:io imports',
+        'Fully usable offline — local data sources resolved through GetIt at '
+            'startup, with no secrets compiled into release builds',
+      ],
+      accent: Color(0xFF7C4DFF),
+      screenshots: [
+        'assets/projects/nexaai_1.jpg',
+        'assets/projects/nexaai_2.jpg',
+        'assets/projects/nexaai_3.jpg',
+        'assets/projects/nexaai_4.jpg',
+        'assets/projects/nexaai_5.jpg',
+        'assets/projects/nexaai_6.jpg',
+      ],
+      repoUrl: 'https://github.com/samer-aljammal/nexa-ai',
+    ),
     Project(
       id: 'chattr',
       name: 'Chattr',
