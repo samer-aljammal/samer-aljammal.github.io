@@ -56,6 +56,44 @@ class LocalProjectsRepository implements ProjectsRepository {
       ],
       repoUrl: 'https://github.com/samer-aljammal/nexa-ai',
     ),
+    // Second: the most design-led piece, and the one with two explainable
+    // rule engines at its core rather than a feature list.
+    Project(
+      id: 'drivio',
+      name: 'Drivio',
+      tagline: 'Vehicle health, service and cost tracking',
+      description:
+          'A vehicle companion app that answers the questions owners actually '
+          'ask: how healthy is my car, what is due next, and what is it costing '
+          'me per kilometre. A rule-based health score and a maintenance '
+          'interval engine turn service, fuel and expense records into a '
+          'dashboard that only highlights what needs attention. Offline-first '
+          'on a local SQL database, with a custom motion system built on '
+          "Flutter's spring physics.",
+      tech: ['Flutter', 'BLoC', 'Drift (SQLite)', 'Clean Architecture'],
+      highlights: [
+        'Explainable 0–100 health score from five weighted, documented '
+            'factors — tap it and every point is accounted for',
+        'Service intervals tracked by distance and time, ordered by an '
+            'estimated due date from the car’s real driving rate',
+        'Offline-first and reactive: watched Drift queries update the '
+            'dashboard live, with no refresh logic anywhere',
+        'Spring-driven press and selection, a shared-element photo '
+            'transition, and charts that draw in once — all honouring '
+            'reduce-motion',
+        '68 passing tests across the health, interval, fuel and cost '
+            'engines, plus cubit orchestration and widgets',
+      ],
+      accent: Color(0xFF43C08D),
+      screenshots: [
+        'assets/projects/drivio_1.jpg',
+        'assets/projects/drivio_2.jpg',
+        'assets/projects/drivio_3.jpg',
+        'assets/projects/drivio_4.jpg',
+        'assets/projects/drivio_5.jpg',
+      ],
+      repoUrl: 'https://github.com/samer-aljammal/drivio',
+    ),
     Project(
       id: 'chattr',
       name: 'Chattr',
@@ -123,7 +161,12 @@ class LocalProjectsRepository implements ProjectsRepository {
           'PayPal, and live courier tracking on a map until the order lands. '
           'Fully localised in English and Arabic, with light, dark and system '
           'themes.',
-      tech: ['Flutter', 'Localization (EN/AR)', 'Live map tracking', 'Payments'],
+      tech: [
+        'Flutter',
+        'Localization (EN/AR)',
+        'Live map tracking',
+        'Payments',
+      ],
       highlights: [
         'Live courier tracking on a map, with route and updating ETA',
         'English and Arabic localisation, including RTL layout',

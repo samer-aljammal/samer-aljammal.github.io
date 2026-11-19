@@ -7,7 +7,8 @@ project root, which is *not* bundled — keep new originals there.
 
 ## Current files
 
-`chattr_1..4` · `spendwise_1..4` · `mealgo_1..4` · `flowerly_1..4`
+`nexaai_1..6` · `drivio_1..5` · `chattr_1..5` · `spendwise_1..4` ·
+`mealgo_1..6` · `flowerly_1..4` · `offers_1..4`
 
 Order matters: `_1` is the first screen the phone mockup shows, so it should be
 the app's most impressive view.

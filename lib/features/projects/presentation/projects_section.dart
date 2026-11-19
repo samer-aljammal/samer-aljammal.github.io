@@ -28,8 +28,9 @@ class ProjectsSection extends StatelessWidget {
             label: 'Work',
             lines: ['Shipped, not', 'sketched.'],
             trailing:
-                'An AI assistant, messaging, personal finance, food delivery, '
-                'commerce and a marketplace. Every screen below is the real '
+                'An AI assistant, vehicle care, messaging, personal finance, '
+                'food delivery, commerce and a marketplace. Every screen below '
+                'is the real '
                 'application. Hover a device to look closer.',
           ),
           SizedBox(height: gap * 0.8),
