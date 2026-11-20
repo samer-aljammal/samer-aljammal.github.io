@@ -94,6 +94,45 @@ class LocalProjectsRepository implements ProjectsRepository {
       ],
       repoUrl: 'https://github.com/samer-aljammal/drivio',
     ),
+    // Third: the one in daily production use, for a real business, and the
+    // only right-to-left app here. Its selling points are product judgement
+    // and Arabic typography as much as architecture.
+    Project(
+      id: 'rasael',
+      name: 'Rasael Orders',
+      tagline: 'Arabic-first order book for a real gift studio',
+      description:
+          'The order tool behind Rasael, a Syrian studio selling personalised '
+          'Arabic gift pages, in daily use for the real business. Orders that '
+          'arrive as Instagram and WhatsApp chats move through a pipeline that '
+          'matches how the studio actually works, from first message to '
+          'delivered link, with the right reply ready at each stage. Built '
+          'right-to-left from the first screen on Supabase, with a public demo '
+          'that runs on invented orders only.',
+      tech: ['Flutter', 'Supabase', 'BLoC', 'Arabic RTL'],
+      highlights: [
+        'Home shows only what needs attention: late orders, today’s '
+            'deadlines and previews unpaid for over 48 hours',
+        'Ready WhatsApp replies filled from the order, with a missing link '
+            'blocking the send rather than going out half-written',
+        'Postgres triggers stamp payment and delivery times, and row-level '
+            'security keeps every row to its owner',
+        'Arabic-aware search that folds hamza, taa marbuta and diacritics, '
+            'and bidi-safe codes, phone numbers and prices',
+        '38 passing tests, including a full widget run from quick add to '
+            'a paid order',
+      ],
+      accent: Color(0xFFE8919C),
+      screenshots: [
+        'assets/projects/rasael_1.jpg',
+        'assets/projects/rasael_2.jpg',
+        'assets/projects/rasael_3.jpg',
+        'assets/projects/rasael_4.jpg',
+        'assets/projects/rasael_5.jpg',
+      ],
+      repoUrl: 'https://github.com/samer-aljammal/rasael-orders',
+      liveUrl: 'https://samer-aljammal.github.io/rasael-orders/',
+    ),
     Project(
       id: 'chattr',
       name: 'Chattr',
