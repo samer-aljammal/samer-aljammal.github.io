@@ -3,7 +3,8 @@
 Single-page portfolio for **Samer Aljammal**, mobile app developer. Violet/magenta
 neon theme, scroll-triggered entrance animations, and live phone mockups that
 tilt toward the cursor while looping through real screenshots of the shipped
-apps: Nexa AI, Drivio, Rasael Orders, Chattr, SpendWise, MealGo, Flowerly and Offers.
+apps: Nexa AI, Drivio, Rasael Orders, arabic_text_kit (a pub.dev package), Chattr,
+SpendWise, MealGo, Flowerly and Offers.
 
 ```bash
 flutter pub get

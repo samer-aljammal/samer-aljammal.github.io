@@ -15,6 +15,7 @@ class Project {
     this.repoUrl,
     this.liveUrl,
     this.storeUrl,
+    this.packageUrl,
     this.isCollaboration = false,
   });
 
@@ -46,11 +47,18 @@ class Project {
   final String? liveUrl;
   final String? storeUrl;
 
+  /// A published package page (pub.dev), for libraries rather than apps.
+  final String? packageUrl;
+
   /// Built with others rather than solo. Surfaces as a badge next to the name,
   /// so a shared project is never implicitly claimed as individual work.
   final bool isCollaboration;
 
   bool get hasScreenshots => screenshots.isNotEmpty;
 
-  bool get hasLinks => repoUrl != null || liveUrl != null || storeUrl != null;
+  bool get hasLinks =>
+      repoUrl != null ||
+      liveUrl != null ||
+      storeUrl != null ||
+      packageUrl != null;
 }

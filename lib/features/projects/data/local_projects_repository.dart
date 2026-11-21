@@ -133,6 +133,40 @@ class LocalProjectsRepository implements ProjectsRepository {
       repoUrl: 'https://github.com/samer-aljammal/rasael-orders',
       liveUrl: 'https://samer-aljammal.github.io/rasael-orders/',
     ),
+    // Fourth: the one other developers can depend on. A library, so its
+    // "screens" are demo pages rendered from the package's real output.
+    Project(
+      id: 'arabictextkit',
+      name: 'arabic_text_kit',
+      tagline: 'Open-source Arabic text package on pub.dev',
+      description:
+          'A dependency-free Dart package that makes search work the way '
+          'Arabic speakers type: it ignores harakat, tatweel, hamza and alef '
+          'forms, taa marbuta and the three digit systems, then maps every '
+          'match back to the original text so it can be highlighted, marks '
+          'and all. Grown from the search in Rasael Orders, with digit '
+          'parsing and bidi helpers for mixed Arabic and English text.',
+      tech: ['Dart', 'Unicode bidi', 'Open source', 'CI'],
+      highlights: [
+        'Folding keeps a source offset for every character, so highlights '
+            'land on the original text, harakat included',
+        'Reads numbers typed on any keyboard: ١٬٥٠٠, ۱۵۰۰ and 1,500 '
+            'all parse to 1500',
+        'Bidi isolates and first-strong direction detection for chat '
+            'messages, codes and phone numbers inside Arabic',
+        '52 tests, including one that runs every README example, with CI '
+            'on the oldest and newest supported Dart',
+      ],
+      accent: Color(0xFFE0B24A),
+      screenshots: [
+        'assets/projects/arabictextkit_1.jpg',
+        'assets/projects/arabictextkit_2.jpg',
+        'assets/projects/arabictextkit_3.jpg',
+        'assets/projects/arabictextkit_4.jpg',
+      ],
+      repoUrl: 'https://github.com/samer-aljammal/arabic_text_kit',
+      packageUrl: 'https://pub.dev/packages/arabic_text_kit',
+    ),
     Project(
       id: 'chattr',
       name: 'Chattr',

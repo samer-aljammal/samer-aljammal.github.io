@@ -73,11 +73,7 @@ class _Device extends StatelessWidget {
   Widget build(BuildContext context) {
     return TiltingPhoneMockup.project(
       project: project,
-      width: context.responsive<double>(
-        mobile: 208,
-        tablet: 236,
-        desktop: 252,
-      ),
+      width: context.responsive<double>(mobile: 208, tablet: 236, desktop: 252),
     );
   }
 }
@@ -174,9 +170,7 @@ class _Details extends StatelessWidget {
         Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: [
-            for (final String tech in project.tech) MonoBadge(tech),
-          ],
+          children: [for (final String tech in project.tech) MonoBadge(tech)],
         ),
 
         if (project.hasLinks) ...[
@@ -200,6 +194,12 @@ class _Details extends StatelessWidget {
               if (project.storeUrl case final String url)
                 UnderlineLink(
                   label: 'App store',
+                  icon: Icons.arrow_outward,
+                  onTap: () => LinkLauncher.open(url),
+                ),
+              if (project.packageUrl case final String url)
+                UnderlineLink(
+                  label: 'pub.dev',
                   icon: Icons.arrow_outward,
                   onTap: () => LinkLauncher.open(url),
                 ),
