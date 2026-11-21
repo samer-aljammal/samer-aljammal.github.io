@@ -274,10 +274,9 @@ class LocalProjectsRepository implements ProjectsRepository {
         'assets/projects/offers_3.jpg',
         'assets/projects/offers_4.jpg',
       ],
-      // Under a collaborator's account, and currently returning 404 — it is
-      // private or the path has changed. Either publish it or drop this line;
-      // a portfolio link that 404s costs more than a missing one.
-      repoUrl: 'https://github.com/MHDN55/offers',
+      // No repo link: the collaborator's repo (github.com/MHDN55/offers) is
+      // private or gone and returned 404 on 2026-11-22. A dead link costs more
+      // than a missing one. Add it back only if it goes public again.
       isCollaboration: true,
     ),
   ];

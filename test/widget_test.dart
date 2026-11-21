@@ -114,8 +114,10 @@ void main() {
     await pumpSite(tester);
 
     final Finder scrollable = find.byType(Scrollable).first;
-    final double before =
-        tester.widget<Scrollable>(scrollable).controller!.offset;
+    final double before = tester
+        .widget<Scrollable>(scrollable)
+        .controller!
+        .offset;
 
     // Driven from the nav rather than the hero button: the nav is pinned, so
     // the tap target is on screen regardless of how tall the hero lays out.
@@ -123,8 +125,10 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(seconds: 2));
 
-    final double after =
-        tester.widget<Scrollable>(scrollable).controller!.offset;
+    final double after = tester
+        .widget<Scrollable>(scrollable)
+        .controller!
+        .offset;
     expect(after, greaterThan(before));
   });
 
@@ -163,6 +167,24 @@ void main() {
     );
   });
 
+  test('the hero shows only the featured projects', () {
+    final projects = ServiceLocator.projects.getProjects();
+    final featured = PhoneScreen.featured(projects);
+
+    expect(featured.map((p) => p.id), ['nexaai', 'drivio', 'rasael']);
+    for (int seed = 0; seed < 20; seed++) {
+      final mixed = PhoneScreen.mixedAcross(
+        featured,
+        perProject: 3,
+        random: Random(seed),
+      );
+      expect(
+        mixed.map((s) => s.label).toSet(),
+        featured.map((p) => p.name).toSet(),
+      );
+    }
+  });
+
   test('hero reel sampling holds for any shuffle', () {
     final projects = ServiceLocator.projects.getProjects();
     for (int seed = 0; seed < 40; seed++) {
@@ -194,9 +216,9 @@ void main() {
   testWidgets('a shared project is labelled a collaboration', (tester) async {
     await pumpSite(tester);
 
-    final shared = ServiceLocator.projects
-        .getProjects()
-        .where((p) => p.isCollaboration);
+    final shared = ServiceLocator.projects.getProjects().where(
+      (p) => p.isCollaboration,
+    );
     expect(shared, isNotEmpty, reason: 'offers is a collaboration');
     expect(find.text('COLLABORATION'), findsNWidgets(shared.length));
   });

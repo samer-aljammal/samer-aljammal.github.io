@@ -1,0 +1,39 @@
+<!doctype html>
+<!-- Link-preview card (1200x630). Rebuild web/og-image.png with og/build.ps1. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #101010; }
+  body { font-family: "Instrument Sans", "Segoe UI", sans-serif; color: #FFFDF9; position: relative; }
+  .wrap { position: absolute; inset: 0; padding: 84px 96px; display: flex; flex-direction: column; justify-content: space-between; }
+  .tag { display: inline-flex; align-items: center; gap: 12px; font-size: 22px; color: #6F879C; letter-spacing: .14em; text-transform: uppercase; }
+  .tag i { width: 10px; height: 10px; border-radius: 50%; background: #2AFF2A; display: inline-block; }
+  h1 { margin: 0; font-size: 96px; font-weight: 500; line-height: 1; letter-spacing: -0.02em; }
+  .role { font-size: 40px; color: #C3CED8; margin-top: 18px; }
+  .stack { font-size: 26px; color: #6F879C; }
+  .foot { display: flex; flex-direction: column; gap: 10px; }
+  .url { font-size: 26px; color: #FFFDF9; }
+  svg { position: absolute; right: 90px; top: 70px; }
+</style>
+</head>
+<body>
+  <svg width="300" height="300" viewBox="0 0 120 120" fill="none" stroke-width="1.4">
+    <g stroke="#2A7FFF" opacity=".55" transform="translate(-1.5 0)"><path d="M60 14 100 37v46L60 106 20 83V37z M60 14v0 M20 37l40 23 40-23 M60 60v46"/></g>
+    <g stroke="#FF2A2A" opacity=".55" transform="translate(1.5 0)"><path d="M60 14 100 37v46L60 106 20 83V37z M20 37l40 23 40-23 M60 60v46"/></g>
+    <g stroke="#FFFDF9" opacity=".85"><path d="M60 14 100 37v46L60 106 20 83V37z M20 37l40 23 40-23 M60 60v46"/></g>
+  </svg>
+  <div class="wrap">
+    <div class="tag"><i></i>Available for work</div>
+    <div>
+      <h1>Samer Aljammal</h1>
+      <div class="role">Flutter Developer · Mobile &amp; Web</div>
+    </div>
+    <div class="foot">
+      <div class="stack">BLoC · Clean Architecture · Supabase · Firebase · Arabic RTL</div>
+      <div class="url">samer-aljammal.github.io</div>
+    </div>
+  </div>
+</body>
+</html>

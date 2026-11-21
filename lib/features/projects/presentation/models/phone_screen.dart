@@ -53,6 +53,13 @@ class PhoneScreen {
     ];
   }
 
+  /// How many projects, from the top of the list, count as featured.
+  static const int featuredCount = 3;
+
+  /// The featured projects: the first [featuredCount], in page order.
+  static List<Project> featured(List<Project> projects) =>
+      projects.take(featuredCount).toList();
+
   /// A shuffled sample drawn from every project.
   ///
   /// Samples per project first, then shuffles the result, so all four apps are

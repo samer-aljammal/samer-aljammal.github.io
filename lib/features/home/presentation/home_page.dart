@@ -38,8 +38,13 @@ class _HomePageState extends State<HomePage> {
 
   /// Built once per page load, not per rebuild: reshuffling on setState would
   /// make the hero device jump to another app whenever the nav highlight moved.
+  ///
+  /// Only the featured projects (the first [PhoneScreen.featuredCount] on the
+  /// page) appear here: the hero is the first thing a recruiter sees, so it
+  /// shows the strongest work, never a random older app.
   late final List<PhoneScreen> _heroScreens = PhoneScreen.mixedAcross(
-    _projects,
+    PhoneScreen.featured(_projects),
+    perProject: 3,
   );
 
   PortfolioSectionId _activeSection = PortfolioSectionId.home;
