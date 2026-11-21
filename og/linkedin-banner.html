@@ -1,0 +1,46 @@
+<!doctype html>
+<!-- LinkedIn banner (1584x396). Rebuild with og/build-banner.ps1.
+     The profile photo covers roughly the left 30% of the bottom half, and phones
+     crop the sides, so all text sits right of centre. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1584px; height: 396px; overflow: hidden; background: #101010; }
+  body { font-family: "Instrument Sans", "Segoe UI", sans-serif; color: #FFFDF9; position: relative; }
+  .grid { position: absolute; inset: 0;
+    background-image: linear-gradient(#ffffff08 1px, transparent 1px), linear-gradient(90deg, #ffffff08 1px, transparent 1px);
+    background-size: 44px 44px; }
+  .cubes { position: absolute; left: 70px; top: 34px; }
+  .text { position: absolute; right: 96px; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-end; text-align: right; }
+  .tag { display: flex; align-items: center; gap: 10px; font-size: 18px; letter-spacing: .16em; text-transform: uppercase; color: #6F879C; }
+  .tag i { width: 9px; height: 9px; border-radius: 50%; background: #2AFF2A; display: inline-block; }
+  h1 { margin: 14px 0 0; font-size: 58px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.05; }
+  .sub { margin-top: 12px; font-size: 26px; color: #C3CED8; }
+  .stack { margin-top: 22px; font-size: 20px; color: #6F879C; }
+  .stack b { color: #FFFDF9; font-weight: 500; }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+
+  <svg class="cubes" width="420" height="220" viewBox="0 0 420 220" fill="none" stroke-width="1.3">
+    <!-- three wireframe cubes with the portfolio's red/cyan split -->
+    <g transform="translate(150 20)">
+      <g stroke="#2A7FFF" opacity=".5" transform="translate(-1.5 0)"><path d="M60 0 110 28v56L60 112 10 84V28z M10 28l50 28 50-28 M60 56v56"/></g>
+      <g stroke="#FF2A2A" opacity=".5" transform="translate(1.5 0)"><path d="M60 0 110 28v56L60 112 10 84V28z M10 28l50 28 50-28 M60 56v56"/></g>
+      <g stroke="#FFFDF9" opacity=".8"><path d="M60 0 110 28v56L60 112 10 84V28z M10 28l50 28 50-28 M60 56v56"/></g>
+    </g>
+    <g transform="translate(320 6) scale(.45)" stroke="#FFFDF9" opacity=".45"><path d="M60 0 110 28v56L60 112 10 84V28z M10 28l50 28 50-28 M60 56v56"/></g>
+    <g transform="translate(40 40) scale(.55)" stroke="#2AFF2A" opacity=".35"><path d="M60 0 110 28v56L60 112 10 84V28z M10 28l50 28 50-28 M60 56v56"/></g>
+  </svg>
+
+  <div class="text">
+    <div class="tag"><i></i>Open to Flutter roles · remote, hybrid, on-site</div>
+    <h1>I build mobile apps that feel effortless.</h1>
+    <div class="sub">Flutter · Android, iOS &amp; Web · Arabic RTL done properly</div>
+    <div class="stack">BLoC · Clean Architecture · Supabase · Firebase · <b>samer-aljammal.github.io</b></div>
+  </div>
+</body>
+</html>
