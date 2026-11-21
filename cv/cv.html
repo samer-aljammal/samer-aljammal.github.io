@@ -1,0 +1,139 @@
+<!doctype html>
+<!--
+  Source of web/Samer_Aljammal_CV.pdf. Edit here, then rebuild the PDF:
+    powershell -ExecutionPolicy Bypass -File cv/build.ps1
+  Rules this CV follows (from recruiter / ATS research, Nov 2026):
+  - Single column, standard headings, real selectable text: parses cleanly in ATS.
+  - Every bullet starts with a verb and says what you built and why it matters.
+  - Keywords sit inside real work, not only in the skills list.
+  - Only numbers the repos can prove. Expect to be asked about anything here.
+  - Before each application, copy the job post's exact terms into the summary
+    and skills where they are true.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Samer Aljammal CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 11mm 14mm 10mm; }
+  :root { --ink: #1b1d21; --soft: #4a4f57; --mute: #6b7079; --accent: #2f6b55; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; background: #fff; color: var(--ink); font: 9.1pt/1.37 "IBM Plex Sans", "Segoe UI", Arial, sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  header { padding-bottom: 8px; border-bottom: 1.5px solid var(--ink); }
+  h1 { font-size: 21pt; line-height: 1.05; margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+  .role { font-size: 11pt; color: var(--accent); font-weight: 500; margin-top: 3px; }
+  .contact { font-size: 8.7pt; color: var(--soft); margin-top: 5px; line-height: 1.5; }
+  section { margin-top: 10px; }
+  h2 { font-size: 8.2pt; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin: 0 0 5px; font-weight: 600; }
+  p { margin: 0; }
+  .summary { color: var(--soft); }
+  .item { margin-top: 8px; break-inside: avoid; }
+  .item:first-of-type { margin-top: 0; }
+  .head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .title { font-weight: 600; font-size: 10pt; }
+  .title .sub { font-weight: 400; color: var(--soft); }
+  .when { color: var(--mute); font-size: 8.6pt; white-space: nowrap; }
+  .tech { color: var(--mute); font-size: 8.5pt; margin-top: 1px; }
+  ul { margin: 3px 0 0; padding-left: 14px; }
+  li { margin: 1.5px 0; padding-left: 2px; }
+  li::marker { color: var(--mute); }
+  .earlier b { font-weight: 600; }
+  .skills p { margin: 1.5px 0; }
+  .skills b { font-weight: 500; color: var(--soft); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Samer Aljammal</h1>
+  <div class="role">Flutter Developer · Mobile (Android, iOS) &amp; Web</div>
+  <div class="contact">
+    Damascus, Syria · +963 983 896 568 · <a href="mailto:samerjmml@gmail.com">samerjmml@gmail.com</a> ·
+    <a href="https://samer-aljammal.github.io">samer-aljammal.github.io</a> · <a href="https://github.com/samer-aljammal">github.com/samer-aljammal</a><br>
+    Open to remote, hybrid or on-site roles · Available now
+  </div>
+</header>
+
+<section>
+  <h2>Summary</h2>
+  <p class="summary">Flutter developer with 1+ year building cross-platform apps in Dart, using BLoC, Clean Architecture,
+  Supabase and Firebase. Founded a small gift business and built the order app it runs on every day, with real paying
+  customers. Writes tested code with CI on GitHub Actions, integrates LLM APIs (Claude, Gemini, OpenAI-compatible), and
+  builds Arabic right-to-left interfaces as a native speaker.</p>
+</section>
+
+<section>
+  <h2>Experience</h2>
+  <div class="item">
+    <div class="head">
+      <div class="title">Founder &amp; Flutter Developer <span class="sub">· Rasael (personalised Arabic gift pages) · Damascus</span></div>
+      <div class="when">Oct 2026 – present</div>
+    </div>
+    <ul>
+      <li>Started and run a small studio that sells personalised Arabic web pages as gifts. Takes orders over Instagram and WhatsApp, and has built and delivered 20+ custom pages for customers.</li>
+      <li>Built <b>Rasael Orders</b> in Flutter and Supabase, the order app the business has run on daily since November 2026: orders from first message to paid and delivered, a ready WhatsApp reply per stage, and an income dashboard.</li>
+      <li>Designed the Postgres schema with row-level security, triggers that record payment and delivery times, and live updates over Supabase Realtime. Wrote Arabic-aware search that ignores hamza, taa marbuta and diacritics.</li>
+      <li>Wrote 38 unit, bloc and widget tests. Set up CI/CD on GitHub Actions to deploy a public web demo that uses invented orders only. Also built the studio's website and order form in HTML, CSS and JavaScript.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Projects</h2>
+
+  <div class="item">
+    <div class="head">
+      <div class="title">Nexa AI <span class="sub">· cross-platform AI assistant</span></div>
+      <div class="when"><a href="https://github.com/samer-aljammal/nexa-ai">github.com/samer-aljammal/nexa-ai</a></div>
+    </div>
+    <div class="tech">Flutter · BLoC · Clean Architecture · Firebase Auth &amp; Firestore · LLM APIs · SSE streaming · GetIt · go_router</div>
+    <ul>
+      <li>Put Claude, Gemini, an OpenAI-compatible endpoint and a mock behind one interface, so switching AI provider takes one line and no provider's data format leaks past the service layer.</li>
+      <li>Wrote a Server-Sent Events parser by hand to stream replies token by token. It handles partial chunks and errors that arrive mid-stream.</li>
+      <li>Modelled errors with a sealed Result type so every caller has to handle failure. Kept Flutter, Firebase and dart:io out of the domain layer, and wrote 73 tests. Kept secrets out of release builds with --dart-define.</li>
+    </ul>
+  </div>
+
+  <div class="item">
+    <div class="head">
+      <div class="title">Drivio <span class="sub">· vehicle health, service and cost tracking</span></div>
+      <div class="when"><a href="https://github.com/samer-aljammal/drivio">github.com/samer-aljammal/drivio</a></div>
+    </div>
+    <div class="tech">Flutter · BLoC · Drift (SQLite) · Clean Architecture · offline-first</div>
+    <ul>
+      <li>Designed a 0–100 health score built from five weighted factors that the app explains point by point. Built service reminders that track both distance and time, sorted by an estimated due date.</li>
+      <li>Built the dashboard on watched Drift (SQLite) queries, so it updates live with no refresh code. Created a spring-based motion system that respects the reduce-motion setting.</li>
+      <li>Wrote 68 tests across the health, interval, fuel and cost logic, the cubits and the widgets.</li>
+    </ul>
+  </div>
+
+  <div class="item earlier">
+    <div class="title">Earlier projects <span class="sub">· code on GitHub, screenshots on the portfolio</span></div>
+    <ul>
+      <li><b>MealGo</b>: food delivery from search to checkout, with live courier tracking on a map and English/Arabic with RTL. Flutter, BLoC, Firebase, flutter_map.</li>
+      <li><b>Chattr</b>: real-time messaging with voice notes, reply quoting, read receipts and last-seen presence. Flutter, BLoC, Firestore.</li>
+      <li><b>SpendWise</b>: expense tracker with spending charts and budget alerts. <b>Flowerly</b>: flower shop with order tracking. <b>Offers</b>: deals marketplace, built with another developer.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="skills">
+  <h2>Skills</h2>
+  <p><b>Mobile:</b> Flutter, Dart, BLoC / Cubit, Clean Architecture, GetIt, go_router, animations, responsive UI</p>
+  <p><b>Backend &amp; data:</b> Supabase (PostgreSQL, row-level security, Realtime), Firebase (Auth, Firestore), Drift / SQLite, Hive, REST APIs, SSE, LLM APIs</p>
+  <p><b>Quality &amp; delivery:</b> unit, bloc and widget testing, CI/CD with GitHub Actions, Git &amp; GitHub, Flutter DevTools, Android Studio, Claude Code</p>
+  <p><b>Also:</b> Arabic / English localisation and RTL, accessibility basics, HTML, CSS, JavaScript, Java, Python, C++</p>
+</section>
+
+<section>
+  <h2>Education &amp; Languages</h2>
+  <p>Communications Engineering (in progress) · Al-Quds Private University (QPU), Damascus</p>
+  <p>Arabic (native) · English (fluent)</p>
+</section>
+
+</body>
+</html>

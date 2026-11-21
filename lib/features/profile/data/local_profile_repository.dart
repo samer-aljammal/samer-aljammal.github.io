@@ -56,18 +56,18 @@ class LocalProfileRepository implements ProfileRepository {
     // relative path would not resolve. Null hides the download button.
     cvUrl: 'https://samer-aljammal.github.io/Samer_Aljammal_CV.pdf',
 
-    // Firebase and clean architecture are taken from your own repo
-    // descriptions. TODO(you): add the specific state-management library
-    // (Bloc / Riverpod / Provider) — your repos say "state management" without
-    // naming it.
+    // Kept in step with the Skills section of cv/cv.html.
     stack: [
       'Flutter',
       'Dart',
+      'BLoC',
       'Clean Architecture',
+      'Supabase',
       'Firebase',
-      'State management',
+      'Drift (SQLite)',
       'REST APIs',
-      'Localization',
+      'Arabic RTL',
+      'Testing',
       'Git',
     ],
 
