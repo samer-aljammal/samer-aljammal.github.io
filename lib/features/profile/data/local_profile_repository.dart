@@ -102,12 +102,11 @@ class LocalProfileRepository implements ProfileRepository {
         url: 'mailto:samerjmml@gmail.com',
         icon: Icons.alternate_email_rounded,
       ),
-      // TODO(you): uncomment once you have a LinkedIn profile to point at.
-      // SocialLink(
-      //   label: 'LinkedIn',
-      //   url: 'https://www.linkedin.com/in/<your-handle>',
-      //   icon: Icons.work_outline_rounded,
-      // ),
+      SocialLink(
+        label: 'LinkedIn',
+        url: 'https://www.linkedin.com/in/samer-aljammal',
+        icon: Icons.work_outline_rounded,
+      ),
     ],
   );
 }
